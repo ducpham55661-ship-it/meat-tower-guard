@@ -1,6 +1,6 @@
 {
- "name": "Hero vs Zombie",
- "short_name": "Hero vs Zombie",
+ "name": "Meat Hero vs Zombie",
+ "short_name": "Meat Hero",
  "start_url": "./",
  "scope": "./",
  "display": "fullscreen",
