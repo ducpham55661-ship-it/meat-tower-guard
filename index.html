@@ -82,9 +82,9 @@ function loadSfx() { if (!AC || typeof SFXD === 'undefined') return; for (const 
 function sfx(n, v = 1, gap = .06) { if (!AC || mute) return true; const L2 = SB[n]; if (!L2 || !L2.length) return false; const t = AC.currentTime; if (t - (SLAST[n] || -9) < gap) return true; SLAST[n] = t; const s2 = AC.createBufferSource(), g = AC.createGain(); s2.buffer = L2[Math.floor(Math.random() * L2.length)]; s2.playbackRate.value = .92 + Math.random() * .16; g.gain.value = v * .55; s2.connect(g).connect(AC.destination); s2.start(); return true; }
 function music() { if (!AC || MU) return; const g = AC.createGain(); g.gain.value = mute || !musOn ? 0 : .5; g.connect(AC.destination); MU = { g, vol: .5 };
   try { const mk = f => { const a = new Audio(MUS + f); a.loop = true; a.preload = 'auto'; const gg = AC.createGain(); gg.gain.value = 0; AC.createMediaElementSource(a).connect(gg).connect(g); return { a, gg }; };
-    MU.calm = mk(L.ch % 2 ? 'bard.mp3' : 'feast.mp3'); MU.war = mk('battle.mp3'); let bad = 0; MU.calm.a.onerror = MU.war.a.onerror = () => { if (!bad++) { clearInterval(MU.iv); MU = null; music0(); } };
-    MU.calm.a.play().catch(() => { }); MU.war.a.play().catch(() => { });
-    MU.iv = setInterval(() => { if (!MU || !MU.calm) return; const hot = st.wt < 0 && !st.over, t = AC.currentTime; MU.calm.gg.gain.setTargetAtTime(hot ? 0 : 1, t, .7); MU.war.gg.gain.setTargetAtTime(hot ? .85 : 0, t, .7); }, 400);
+    // một bài chạy suốt màn, không đổi bài giữa chừng: màn trùm và chế độ vô tận dùng bài trận, còn lại xen kẽ hai bài theo chặng
+    MU.calm = mk(L.finalBoss || L.endless ? 'battle.mp3' : L.ch % 2 ? 'bard.mp3' : 'feast.mp3'); MU.calm.gg.gain.value = 1; let bad = 0; MU.calm.a.onerror = () => { if (!bad++) { MU = null; music0(); } };
+    MU.calm.a.play().catch(() => { });
   } catch (e) { MU = null; music0(); } }
 // nhạc nền tự tạo (dự phòng): giai điệu ngũ cung 4 ô nhịp, có trống nhẹ khi đang có đợt quái
 function music0() { if (!AC || MU) return; const g = AC.createGain(); g.gain.value = mute || !musOn ? 0 : .05; g.connect(AC.destination); MU = { g, vol: .05, t: AC.currentTime + .15, i: 0 };
