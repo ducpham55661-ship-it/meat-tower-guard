@@ -90,7 +90,7 @@ const rm = (a, o) => { const i = a.indexOf(o); if (i >= 0) a.splice(i, 1); };
 // ---------- assets ----------
 const I = {}; let ready = 0; const names = Object.keys(ASSETS);
 names.forEach(n => I[n] = new Image()); let loadTick = () => { };
-const loadImg = (n, cb) => { const i = I[n]; if (i.q) return 0; i.q = 1; i.onload = i.onerror = () => { i.ok = 1; ready++; loadTick(); if (cb) cb(); }; i.src = ASSETS[n]; return 1; };
+const loadImg = (n, cb) => { const i = I[n]; if (i.q) return 0; i.q = 1; let tries = 0; const fin = () => { i.ok = 1; ready++; loadTick(); if (cb) cb(); }; i.onload = fin; i.onerror = () => { if (++tries <= 3 && !/^data:/.test(ASSETS[n])) setTimeout(() => { i.src = ASSETS[n] + '?r=' + tries; }, 400 * tries); else { I[n] = new Image(); I[n].q = 1; I[n].ok = 1; fin(); } }; i.src = ASSETS[n]; return 1; };
 // white silhouettes for hit flash, made once on demand
 const FL = {}; function flashImg(n) { if (FL[n]) return FL[n]; const s = I[n], c = document.createElement('canvas'); c.width = s.width; c.height = s.height; const x = c.getContext('2d'); x.drawImage(s, 0, 0); x.globalCompositeOperation = 'source-in'; x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); return FL[n] = c; }
 // ---------- sound ----------
@@ -563,7 +563,7 @@ function draw() {
     const RD = I.rdW && I.rdW.width;
     if (RD) { // tường cạnh bên: một dải thẳng đứng cho mỗi nửa tường (hai bên cổng), vẽ sẵn nhìn dọc theo tường
       const east = w.n[0] > 0, len = (H - 1.45) * U * TILT;
-      for (const s of [-1, 1]) { const zn = s > 0 ? H : -1.45; add(zn - .02, () => { const bk = br && (s > 0 ? w.i : w.i + 1) % 2 === 0, im = I[stone ? (bk ? 'rdSB' : 'rdS') : (bk ? 'rdWB' : 'rdW')], pw = (stone ? .95 : .74) * U, ph = len + (stone ? 1.15 : 1.05) * U, x = sx(w.n[0] * H + (w.hit > .2 ? rnd(-.04, .04) : 0)), y = sy(zn + .12); X.fillStyle = 'rgba(50,24,10,.2)'; X.fillRect(x + (east ? .12 : -.4) * U, y - len, .28 * U, len); X.save(); X.translate(x, y); if (!east) X.scale(-1, 1); X.drawImage(im, -pw / 2, -ph, pw, ph); X.restore(); }); }
+      for (const s of [-1, 1]) { const zn = s > 0 ? H : -1.45; add(zn - .02, () => { const bk = br && (s > 0 ? w.i : w.i + 1) % 2 === 0, im = I[stone ? (bk ? 'rdSB' : 'rdS') : (bk ? 'rdWB' : 'rdW')]; if (!im || !im.width) return; const pw = (stone ? .95 : .74) * U, ph = len + (stone ? 1.15 : 1.05) * U, x = sx(w.n[0] * H + (w.hit > .2 ? rnd(-.04, .04) : 0)), y = sy(zn + .12); X.fillStyle = 'rgba(50,24,10,.2)'; X.fillRect(x + (east ? .12 : -.4) * U, y - len, .28 * U, len); X.save(); X.translate(x, y); if (!east) X.scale(-1, 1); X.drawImage(im, -pw / 2, -ph, pw, ph); X.restore(); }); }
     } else {
     const sp = stone ? .7 : .8, n = Math.round((H - 1.45) / sp);
     for (const s of [-1, 1]) for (let k = 0; k <= n; k++) { const z = s * (1.45 + k * (H - 1.45) / n); add(z, () => { const bk = br && (k + w.i) % 3 !== 0, x = w.n[0] * H + (w.hit > .2 ? rnd(-.04, .04) : 0);
@@ -575,7 +575,7 @@ function draw() {
     const RD = I.rdW && I.rdW.width;
     if (RD) { // tường cạnh bên: một dải thẳng đứng cho mỗi nửa tường (hai bên cổng), vẽ sẵn nhìn dọc theo tường
       const east = w.n[0] > 0, len = (H2 - 1.45) * U * TILT;
-      for (const s of [-1, 1]) { const zn = s > 0 ? H2 : -1.45; add(zn - .02, () => { const bk = br && (s > 0 ? w.i : w.i + 1) % 2 === 0, im = I[stone ? (bk ? 'rdSB' : 'rdS') : (bk ? 'rdWB' : 'rdW')], pw = (stone ? .95 : .74) * U, ph = len + (stone ? 1.15 : 1.05) * U, x = sx(w.n[0] * H2 + (w.hit > .2 ? rnd(-.04, .04) : 0)), y = sy(zn + .12); X.fillStyle = 'rgba(50,24,10,.2)'; X.fillRect(x + (east ? .12 : -.4) * U, y - len, .28 * U, len); X.save(); X.translate(x, y); if (!east) X.scale(-1, 1); X.drawImage(im, -pw / 2, -ph, pw, ph); X.restore(); }); }
+      for (const s of [-1, 1]) { const zn = s > 0 ? H2 : -1.45; add(zn - .02, () => { const bk = br && (s > 0 ? w.i : w.i + 1) % 2 === 0, im = I[stone ? (bk ? 'rdSB' : 'rdS') : (bk ? 'rdWB' : 'rdW')]; if (!im || !im.width) return; const pw = (stone ? .95 : .74) * U, ph = len + (stone ? 1.15 : 1.05) * U, x = sx(w.n[0] * H2 + (w.hit > .2 ? rnd(-.04, .04) : 0)), y = sy(zn + .12); X.fillStyle = 'rgba(50,24,10,.2)'; X.fillRect(x + (east ? .12 : -.4) * U, y - len, .28 * U, len); X.save(); X.translate(x, y); if (!east) X.scale(-1, 1); X.drawImage(im, -pw / 2, -ph, pw, ph); X.restore(); }); }
     } else {
     const sp = stone ? .7 : .8, n = Math.round((H2 - 1.45) / sp);
     for (const s of [-1, 1]) for (let k = 0; k <= n; k++) { const z = s * (1.45 + k * (H2 - 1.45) / n); add(z, () => { const bk = br && (k + w.i) % 3 !== 0, x = w.n[0] * H2 + (w.hit > .2 ? rnd(-.04, .04) : 0);
