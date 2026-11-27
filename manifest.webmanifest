@@ -1,6 +1,6 @@
 {
- "name": "Meat Tower Guard",
- "short_name": "Meat Tower",
+ "name": "Hero vs Zombie",
+ "short_name": "Hero vs Zombie",
  "start_url": "./",
  "scope": "./",
  "display": "fullscreen",
