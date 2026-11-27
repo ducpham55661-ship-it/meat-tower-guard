@@ -204,16 +204,18 @@ function rangedHit(H, x, z, y, t, d) {
 }
 const hero = { x: 0, z: 2, hp: CFG.hero.hp, max: CFG.hero.hp, cd: 0, inv: 0, dead: 0, stack: [], dir: 1, aim: 0, swing: 0, noHit: 9, vx: 0, vz: 0, run: 0, lean: 0, flash: 0 };
 const PILE = { x: -3.3, z: .4 }, trees = []; st.wood = 0; st.house = 0; st.spk = [0, 0, 0, 0];
-{ let sd = 7; const Rn = () => (sd = (sd * 16807) % 2147483647) / 2147483647; let guard = 0; while (trees.length < 30 && guard++ < 4000) { const a = Rn() * 6.283, d = 13 + Rn() * 8, x = Math.cos(a) * d, z = Math.sin(a) * d; if (Math.abs(x) < 2.4 || Math.abs(z) < 2.4 || Math.abs(x) > MAP - 2 || Math.abs(z) > MAP - 2 || (Math.abs(x) < H + 4.6 && Math.abs(z) < H + 4.6) || trees.some(t => hyp(t.x - x, t.z - z) < 2.3)) continue; trees.push({ x, z, hp: 5, re: 0, taken: 0, sh: 0, s: .85 + Rn() * .35 }); } }
+{ let sd = 7; const Rn = () => (sd = (sd * 16807) % 2147483647) / 2147483647; let guard = 0; while (trees.length < 30 && guard++ < 4000) { const a = Rn() * 6.283, d = 13 + Rn() * 8, x = Math.cos(a) * d, z = Math.sin(a) * d; if (Math.abs(x) < 2.4 || Math.abs(z) < 2.4 || Math.abs(x) > MAP - 2 || Math.abs(z) > MAP - 2 || (Math.abs(x) < H + 4.6 && Math.abs(z) < H + 4.6) || trees.some(t => hyp(t.x - x, t.z - z) < 2.3)) continue; trees.push({ x, z, hp: 5, re: 0, taken: 0, sh: 0, s: .85 + Rn() * .35 }); }
+  // cánh rừng nhỏ sát ngoài vòng thành ngoài phía tây, cạnh cổng tây, để thợ gỗ đi chặt nhanh (28/11); nằm ngoài lối quái đi vào cổng
+  let g2 = 0; while (trees.length < 40 && g2++ < 3000) { const x = -(H + 4.9 + Rn() * 3.6), z = 2.8 + Rn() * 5.2; if (trees.some(t => hyp(t.x - x, t.z - z) < 1.6)) continue; trees.push({ x, z, hp: 5, re: 0, taken: 0, sh: 0, s: .8 + Rn() * .25, gr: 1 }); } }
 const padWood = p => p.w ? Math.round(p.w * Math.pow(p.up ? 2 : p.count ? 1.5 : 1, p.lvl)) : 0;
 function wcStep(a, dt) {
-  a.chop = Math.max(0, (a.chop || 0) - dt * 2.4); a.logs = a.logs || 0; const zb = near(a.x, a.z, 4.5), free = () => { if (a.tg) { a.tg.taken = 0; a.tg = null; } };
-  if (zb) { free(); if (!inCity(a.x, a.z)) walk(a, 0, 4.5, 4.6, dt); return; }
-  if (a.logs >= 5 || (a.logs && !a.tg && !trees.some(t => t.hp > 0 && !t.taken))) { free(); if (walk(a, PILE.x + 1.1, PILE.z + .6, 3.6, dt) < .9) { st.wood += a.logs; pop(PILE.x, PILE.z, 2, '+' + a.logs + ' wood', '#ffd9a0'); a.logs = 0; snd(300, .08, 'triangle', .04); } return; }
+  a.chop = Math.max(0, (a.chop || 0) - dt * 2.4); a.logs = a.logs || 0; const zb = near(a.x, a.z, 3.8), free = () => { if (a.tg) { a.tg.taken = 0; a.tg = null; } }, toPile = () => { if (walk(a, PILE.x + 1.1, PILE.z + .6, 4.2, dt) < .9 && a.logs) { st.wood += a.logs; pop(PILE.x, PILE.z, 2, '+' + a.logs + ' wood', '#ffd9a0'); a.logs = 0; snd(300, .08, 'triangle', .04); } };
+  if (zb) { free(); if (!inCity(a.x, a.z)) walk(a, 0, 4.5, 5, dt); else if (a.logs || hyp(a.x - PILE.x - 1.1, a.z - PILE.z - .6) > 1) toPile(); return; }
+  if (a.logs >= 5 || (a.logs && !a.tg && !trees.some(t => t.hp > 0 && !t.taken))) { free(); if (walk(a, PILE.x + 1.1, PILE.z + .6, 4.4, dt) < .9) { st.wood += a.logs; pop(PILE.x, PILE.z, 2, '+' + a.logs + ' wood', '#ffd9a0'); a.logs = 0; snd(300, .08, 'triangle', .04); } return; }
   if (!a.tg || a.tg.hp <= 0) { free(); let bd = 99; for (const t of trees) if (t.hp > 0 && !t.taken) { const r = hyp(t.x - a.x, t.z - a.z); if (r < bd) { bd = r; a.tg = t; } } if (a.tg) a.tg.taken = 1; }
   if (!a.tg) { if (hyp(a.x - PILE.x - 2, a.z - PILE.z - 1.5) > .7) walk(a, PILE.x + 2, PILE.z + 1.5, 3, dt); return; }
   const t = a.tg, side = a.x < t.x ? -1 : 1;
-  if (walk(a, t.x + side * .9, t.z + .15, 3.6, dt) < .4) { a.mv = 0; a.dir = -side; a.face = 'S'; if (a.cd <= 0) { a.cd = .85; a.chop = 1; t.hp--; t.sh = 1; a.logs++; (sfx('chop', .35, .3) || snd(180, .06, 'square', .035, 90)); puff(t.x, t.z, 1, '#e0b070', 3); if (t.hp <= 0) { t.re = 40; t.taken = 0; a.tg = null; puff(t.x, t.z, 1.5, '#e8843c', 10); } } }
+  if (walk(a, t.x + side * .9, t.z + .15, 4.4, dt) < .4) { a.mv = 0; a.dir = -side; a.face = 'S'; if (a.cd <= 0) { a.cd = .7; a.chop = 1; t.hp--; t.sh = 1; a.logs++; (sfx('chop', .35, .3) || snd(180, .06, 'square', .035, 90)); puff(t.x, t.z, 1, '#e0b070', 3); if (t.hp <= 0) { t.re = t.gr ? 22 : 40; t.taken = 0; a.tg = null; puff(t.x, t.z, 1.5, '#e8843c', 10); } } }
 }
 st.tm = []; hero.ult = 0;
 const ULT = { kira: ['WHIRLWIND', '🌪️'], boran: ['SHIELD SLAM', '🛡️'], wren: ['ARROW RAIN', '🏹'], arlo: ['POWER SHOT', '🎯'], lyra: ['CHAIN LIGHTNING', '⚡'], orin: ['THUNDERSTORM', '🌩️'], tao: ['DRAGON RUSH', '🐉'], akira: ['SILENT CUT', '🌙'], mei: ['LOTUS VORTEX', '🌸'], jax: ['SIX SHOOTER', '🔫'], ruby: ['GRAPESHOT', '🎇'], ignis: ['METEOR', '☄️'], isolde: ['ICE AGE', '🌨️'], seraphine: ['SUNBURST', '☀️'] };
@@ -505,9 +507,9 @@ function step(dt) {
 }
 function porter(a, dt) {
   const free = drops.filter(d => !d.taken && d.t > 1);
-  if (a.carry >= 12 || (a.carry && !a.tg && !free.length)) a.unload = 1; if (!a.carry) a.unload = 0; if (a.unload) { if (walk(a, C.x - 1.5, C.z + 1.3, 4.4, dt) < 1.3) { a.dp = (a.dp || 0) - dt; if (a.dp <= 0) { a.dp = .08; a.carry--; C.stock++; C.bump = 1; } } return; }
+  if (a.carry >= 18 || (a.carry && !a.tg && !free.length)) a.unload = 1; if (!a.carry) a.unload = 0; if (a.unload) { if (walk(a, C.x - 1.5, C.z + 1.3, 5.4, dt) < 1.3) { a.dp = (a.dp || 0) - dt; if (a.dp <= 0) { a.dp = .08; a.carry--; C.stock++; C.bump = 1; } } return; }
   if (!a.tg || !drops.includes(a.tg)) { a.tg = null; let bd = 99; for (const d of free) { const r = hyp(d.x - a.x, d.z - a.z); if (r < bd) { bd = r; a.tg = d; } } if (a.tg) a.tg.taken = 1; }
-  if (a.tg) { if (walk(a, a.tg.x, a.tg.z, 4.4, dt) < .8) { rm(drops, a.tg); a.tg = null; a.carry++; } } else if (hyp(a.x - C.x + 3, a.z - C.z - 2.2) > .6) walk(a, C.x - 3, C.z + 2.2, 3, dt);
+  if (a.tg) { if (walk(a, a.tg.x, a.tg.z, 5.4, dt) < .8) { rm(drops, a.tg); a.tg = null; a.carry++; } } else if (hyp(a.x - C.x + 3, a.z - C.z - 2.2) > .6) walk(a, C.x - 3, C.z + 2.2, 3, dt);
 }
 function end(win) { { const kl = SAVE.kills || (SAVE.kills = {}); for (const k in st.kc || {}) kl[k] = (kl[k] || 0) + st.kc[k]; st.kc = {}; save(); }
   if (st.over) return; st.over = true; try { const b = +localStorage.getItem('mtg_best') || 0; if (st.wave > b) localStorage.setItem('mtg_best', st.wave); } catch (e) { }
