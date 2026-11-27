@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meat Hero vs Zombie · Free browser game</title>
+<meta name="description" content="Chop zombies, stack a wobbling tower of meat and build your fortress. 22 heroes, boss gates, pets and rare golden heroes. Play free in your browser, no download.">
+<meta property="og:title" content="Meat Hero vs Zombie">
+<meta property="og:description" content="Chop zombies. Stack meat. Build your fortress. Play free in your browser.">
+<meta property="og:image" content="https://ducpham55661-ship-it.github.io/meat-tower-guard/home/img/og.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ducpham55661-ship-it.github.io/meat-tower-guard/home/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ducpham55661-ship-it.github.io/meat-tower-guard/home/">
+<meta name="theme-color" content="#2a1408">
+<link rel="icon" href="img/icon-32.png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/logo.webp">
+<style>
+:root{--bg:#1b0d06;--bg2:#2a1408;--card:#3a1e0e;--or:#ff8a1e;--gold:#ffd34d;--gr:#9be22d;--red:#e2463b;--cream:#fff3d6;--ink:#2a1408;--r:22px;--nav:64px;--sb:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{background:var(--bg);color:var(--cream);font:800 17px/1.5 Nunito,system-ui,Arial,sans-serif;overflow-x:clip}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.dsp{font-family:"Lilita One","Arial Black",Impact,sans-serif;font-weight:400;letter-spacing:.5px;line-height:1.05}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+section{position:relative;padding:clamp(56px,9vw,120px) 0}
+.kick{display:inline-block;font:900 13px/1 Nunito,sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:7px 14px;border-radius:99px;transform:rotate(-2deg);box-shadow:0 4px 0 #a86b00}
+h2{font-size:clamp(34px,6vw,68px);margin:16px 0 14px;text-shadow:0 4px 0 #0006}
+h2 em{font-style:normal;color:var(--gold)} h2 b{font-weight:400;color:var(--gr)}
+.lead{max-width:640px;color:#f3dcb8;font-size:clamp(16px,1.6vw,19px)}
+.center{text-align:center}.center .lead{margin-inline:auto}
+/* buttons */
+.btn{--c:var(--gold);--d:#a86b00;position:relative;display:inline-flex;align-items:center;gap:10px;font:400 clamp(18px,2.2vw,24px)/1 "Lilita One",sans-serif;letter-spacing:1px;color:var(--ink);background:linear-gradient(#ffe27a,var(--c));padding:.85em 1.5em;border-radius:18px;border:0;cursor:pointer;box-shadow:0 7px 0 var(--d),0 16px 30px #0007;transition:transform .12s,box-shadow .12s;overflow:hidden;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,#fff0 35%,#fff9 50%,#fff0 65%);transform:translateX(-120%);animation:shine 3.2s infinite}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 0 var(--d),0 22px 36px #0008}
+.btn:active{transform:translateY(5px);box-shadow:0 2px 0 var(--d),0 6px 12px #0007}
+.btn.play{--c:#8fe02a;--d:#3f7a0a;background:linear-gradient(#c9ff6b,var(--c));color:#12260a}
+.btn.gh{--c:#fff0;--d:#0000;background:#0005;color:var(--cream);box-shadow:inset 0 0 0 3px #fff5,0 10px 24px #0006;backdrop-filter:blur(6px)}
+.btn.gh::after{display:none}
+.btn svg{width:1em;height:1em;flex:none}
+@keyframes shine{0%,55%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+/* nav */
+#nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;display:flex;align-items:center;transition:background .3s,box-shadow .3s,transform .3s}
+#nav.on{background:#1b0d06e6;backdrop-filter:blur(10px);box-shadow:0 2px 0 #ffd34d33,0 10px 30px #0008}
+#nav .wrap{display:flex;align-items:center;gap:18px}
+#nav .lg{height:46px;width:auto;opacity:0;transform:translateY(-8px);transition:.3s}
+#nav.on .lg{opacity:1;transform:none}
+#nav nav{margin-left:auto;display:flex;gap:22px;font:900 14px Nunito;letter-spacing:1.5px;text-transform:uppercase}
+#nav nav a{opacity:.85;position:relative;padding:6px 0}
+#nav nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:3px;border-radius:3px;background:var(--gold);transition:right .25s}
+#nav nav a:hover{opacity:1}#nav nav a:hover::after{right:0}
+#nav .btn{font-size:17px;min-height:46px;padding:.7em 1.2em;border-radius:14px;box-shadow:0 5px 0 var(--d)}
+/* hero */
+#hero{min-height:100svh;padding:0;display:grid;place-items:center;overflow:hidden;isolation:isolate;background:radial-gradient(120% 90% at 50% 40%,#ffb62e 0,#ff7a12 38%,#d9430c 70%,#7a1f08 100%)}
+.rays{position:absolute;left:50%;top:42%;width:240vmax;height:240vmax;margin:-120vmax 0 0 -120vmax;background:repeating-conic-gradient(from 0deg,#fff3 0 6deg,#fff0 6deg 14deg);animation:spin 90s linear infinite;z-index:-5;mask:radial-gradient(circle,#000 0,#000 30%,#0000 62%);-webkit-mask:radial-gradient(circle,#000 0,#000 30%,#0000 62%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lay{position:absolute;will-change:transform;pointer-events:none}
+.wall{left:50%;bottom:9%;width:max(1500px,128vw);transform:translateX(-50%);z-index:-4;filter:drop-shadow(0 -6px 30px #7a1f0855)}
+.grd{position:absolute;inset:auto 0 0 0;height:20%;background:linear-gradient(#5c9a1a,#2f5c0c);z-index:-4;box-shadow:inset 0 14px 0 #7fc628}
+.hk{left:max(-4vw,calc(50% - 720px));bottom:1%;height:min(84svh,760px);z-index:-2;filter:drop-shadow(0 22px 18px #0007)}
+.hb{right:max(-5vw,calc(50% - 760px));bottom:1%;height:min(86svh,780px);z-index:-2;filter:drop-shadow(0 22px 18px #0007)}
+.hands{left:50%;bottom:-3%;width:max(1300px,112vw);transform:translateX(-50%);z-index:3}
+.hands img{width:100%;animation:claw 3.4s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes claw{0%,100%{transform:translateY(8%) scaleY(.96)}50%{transform:translateY(0) scaleY(1.03)}}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.hc{position:relative;z-index:4;text-align:center;padding:calc(var(--nav) + 10px) 20px 15svh;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2svh,20px)}
+.hlogo{width:min(620px,78vw,92svh);filter:drop-shadow(0 14px 0 #0003) drop-shadow(0 26px 30px #0008);animation:pop .9s cubic-bezier(.2,1.5,.4,1) both,bob 5s ease-in-out 1s infinite}
+@keyframes pop{0%{transform:scale(.3) rotate(-8deg);opacity:0}100%{transform:none;opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-10px) rotate(.6deg)}}
+.tag{font:400 clamp(20px,3.4vw,38px)/1.1 "Lilita One",sans-serif;color:#fff;text-shadow:0 3px 0 #7a1f08,0 0 24px #7a1f08;animation:up .7s .35s both}
+.tag b{font-weight:400;color:var(--gold)}
+.cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:up .7s .5s both}
+.cta .btn.big{font-size:clamp(22px,3vw,32px)}
+.chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;animation:up .7s .65s both}
+.chips span{font:900 13px Nunito;letter-spacing:1px;text-transform:uppercase;background:#2a1408cc;border:2px solid #ffd34d66;padding:6px 12px;border-radius:99px;backdrop-filter:blur(4px)}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.scrl{position:absolute;left:50%;bottom:calc(14px + var(--sb));z-index:5;width:28px;height:44px;margin-left:-14px;border:3px solid #fff9;border-radius:16px}
+.scrl::after{content:"";position:absolute;left:50%;top:7px;width:6px;height:10px;margin-left:-3px;border-radius:3px;background:#fff;animation:whl 1.6s infinite}
+@keyframes whl{0%{transform:translateY(0);opacity:1}100%{transform:translateY(16px);opacity:0}}
+/* marquee */
+.mq{background:var(--gold);color:var(--ink);transform:rotate(-1.2deg) scale(1.03);padding:12px 0;overflow:hidden;box-shadow:0 8px 0 #a86b00,0 20px 40px #0008;position:relative;z-index:6;margin-top:-18px}
+.mq div{display:flex;width:max-content;animation:mq 30s linear infinite;font:400 clamp(18px,2.4vw,26px)/1 "Lilita One",sans-serif;letter-spacing:1px;white-space:nowrap}
+.mq i{font-style:normal;color:var(--red)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* reveal */
+.rv.rv{opacity:0;translate:0 40px;scale:.97;transition:opacity .7s cubic-bezier(.2,.8,.2,1),translate .7s cubic-bezier(.2,.8,.2,1),scale .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*90ms)}
+.rv.rv.in{opacity:1;translate:none;scale:none}
+/* how */
+#how{background:radial-gradient(80% 60% at 50% 0,#4a2410 0,var(--bg) 70%)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.tilt{transform-style:preserve-3d;transition:transform .18s ease-out;will-change:transform}
+.st{position:relative;background:linear-gradient(160deg,#5a2f14,#33180a);border:3px solid #ffd34d44;border-radius:var(--r);padding:150px 22px 26px;text-align:center;box-shadow:0 10px 0 #120803,0 30px 50px #0008}
+.st .n{position:absolute;left:18px;top:14px;font:400 64px/1 "Lilita One";color:#ffd34d22}
+.st .ic{position:absolute;left:50%;top:-34px;height:176px;transform:translateX(-50%) translateZ(50px);filter:drop-shadow(0 16px 12px #0009);animation:bob 4.5s ease-in-out infinite;animation-delay:calc(var(--i,0)*-1.4s)}
+.st h3{font-size:30px;color:var(--gold);margin-bottom:8px}
+.st p{color:#f1d9b4;font-size:16px}
+/* trailer */
+#trailer{background:linear-gradient(var(--bg),#27110a 40%,var(--bg))}
+.tv{position:relative;margin:40px auto 0;max-width:980px;border-radius:26px;padding:12px;background:linear-gradient(145deg,#ffd34d,#ff8a1e 45%,#a23b0a);box-shadow:0 12px 0 #5a2206,0 40px 80px #000a}
+.tv video,.tv .ph{display:block;width:100%;aspect-ratio:16/9;border-radius:16px;background:#000 center/cover;object-fit:cover}
+.tv button{position:absolute;inset:12px;border:0;border-radius:16px;background:linear-gradient(#0000,#0008);cursor:pointer;display:grid;place-items:center}
+.tv button i{width:clamp(72px,11vw,112px);aspect-ratio:1;border-radius:50%;background:var(--gold);display:grid;place-items:center;box-shadow:0 8px 0 #a86b00,0 0 0 14px #ffd34d44;animation:pulse 1.8s infinite}
+.tv button svg{width:42%;margin-left:8%;fill:var(--ink)}
+@keyframes pulse{0%{box-shadow:0 8px 0 #a86b00,0 0 0 0 #ffd34d88}100%{box-shadow:0 8px 0 #a86b00,0 0 0 30px #ffd34d00}}
+/* heroes */
+#heroes{background:var(--bg);overflow:hidden}
+.hsel{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(18px,4vw,50px);align-items:center;margin-top:36px}
+.stage{position:relative;aspect-ratio:1/1.05;border-radius:30px;overflow:hidden;border:4px solid #ffd34d66;box-shadow:0 12px 0 #120803,0 40px 70px #000a;background:#3a1e0e center/cover;isolation:isolate}
+.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 100%,#1b0d06cc,#0000 70%),linear-gradient(#0000 55%,#1b0d06aa);z-index:1}
+.stage .big{position:absolute;left:50%;bottom:2%;height:92%;max-width:none;transform:translateX(-50%);z-index:2;filter:drop-shadow(0 18px 14px #000a)}
+.stage .big.sw{animation:swap .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes swap{0%{transform:translateX(-30%) scale(.85);opacity:0}100%{transform:translateX(-50%);opacity:1}}
+.stage .cls{position:absolute;left:16px;top:16px;z-index:3;font:900 13px Nunito;letter-spacing:2px;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:6px 12px;border-radius:99px}
+.hinfo h3{font-size:clamp(44px,7vw,84px);color:var(--gold);text-shadow:0 5px 0 #0007}
+.hinfo .role{font-size:19px;color:#f3dcb8;margin:4px 0 18px}
+.bar{display:grid;grid-template-columns:92px 1fr 34px;align-items:center;gap:10px;font:900 13px Nunito;letter-spacing:1px;text-transform:uppercase;margin:9px 0}
+.bar u{display:block;height:14px;border-radius:9px;background:#0007;overflow:hidden;box-shadow:inset 0 2px 0 #0006;text-decoration:none}
+.bar u i{display:block;height:100%;width:var(--w,0%);border-radius:9px;background:linear-gradient(90deg,var(--or),var(--gold));transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar b{text-align:right;color:var(--gold)}
+.thumbs{display:flex;gap:10px;overflow-x:auto;padding:26px 4px 14px;margin-top:8px;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.thumbs::-webkit-scrollbar{display:none}
+.th{flex:0 0 86px;height:104px;border-radius:16px;border:3px solid #fff3;background:#3a1e0e center/cover;position:relative;overflow:hidden;cursor:pointer;scroll-snap-align:center;transition:transform .18s,border-color .18s;padding:0}
+.th img{position:absolute;left:50%;top:6px;height:150%;max-width:none;transform:translateX(-50%);pointer-events:none}
+.th:hover{transform:translateY(-6px)}.th.on{border-color:var(--gold);transform:translateY(-10px) scale(1.06);box-shadow:0 10px 20px #000a,0 0 0 3px #ffd34d55}
+/* bosses */
+#foes{background:linear-gradient(var(--bg),#16210a 50%,var(--bg))}
+.row{display:flex;gap:18px;overflow-x:auto;padding:70px max(20px,calc(50vw - 590px)) 30px;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.row::-webkit-scrollbar{display:none}
+.boss{flex:0 0 min(250px,68vw);scroll-snap-align:center;position:relative;background:linear-gradient(165deg,#26360f,#131c07);border:3px solid #9be22d55;border-radius:var(--r);padding:150px 18px 20px;text-align:center;box-shadow:0 10px 0 #070b03,0 26px 40px #0009}
+.boss img{position:absolute;left:50%;top:-56px;height:200px;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 14px 10px #000b);transition:transform .25s}
+.boss:hover img{transform:translateX(-50%) scale(1.08) rotate(-3deg)}
+.boss h3{font-size:24px;color:var(--gr)}.boss p{font-size:14px;color:#d6e8b5}
+.boss small{display:inline-block;margin-top:8px;font:900 11px Nunito;letter-spacing:1.5px;text-transform:uppercase;background:#9be22d;color:#14200a;padding:4px 10px;border-radius:99px}
+/* features */
+#feat{background:radial-gradient(90% 60% at 50% 100%,#4a2410 0,var(--bg) 70%)}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:44px}
+.f{grid-column:span 2;position:relative;overflow:hidden;background:linear-gradient(160deg,#4a2712,#2a1408);border:3px solid #ffd34d33;border-radius:var(--r);padding:24px 22px;min-height:230px;box-shadow:0 8px 0 #120803,0 24px 40px #0008;isolation:isolate}
+.f.w{grid-column:span 3}
+.f h3{font-size:27px;color:var(--gold);margin-bottom:6px;max-width:62%}
+.f p{font-size:15px;color:#f1d9b4;max-width:60%}
+.f .art{position:absolute;right:-8px;bottom:-10px;height:86%;max-width:none;z-index:-1;filter:drop-shadow(0 10px 10px #0009);transition:transform .3s}
+.f:hover .art{transform:scale(1.07) rotate(2deg)}
+.aura{position:absolute;right:26px;bottom:26px;width:150px;aspect-ratio:1;z-index:-1}
+.aura i{position:absolute;inset:0;border-radius:50%;border:5px dashed var(--c);animation:spin 9s linear infinite;box-shadow:0 0 34px var(--c),inset 0 0 34px var(--c)}
+.aura i:nth-child(2){inset:22px;animation-duration:6s;animation-direction:reverse;--c:#c58bff}.aura i:nth-child(3){inset:46px;animation-duration:4s;--c:#ff4fd8}
+.pets{position:absolute;right:10px;bottom:14px;display:grid;grid-template-columns:repeat(3,62px);gap:4px;z-index:-1}
+.pets img{width:62px;height:62px;object-fit:contain;animation:bob 3.5s ease-in-out infinite;animation-delay:calc(var(--i)*-.5s)}
+.gold{background:linear-gradient(160deg,#8a5a12,#4a2c06);border-color:#ffd34d}
+.gold .art{filter:sepia(.5) saturate(2.1) brightness(1.12) drop-shadow(0 0 20px #ffd34d)}
+.bl{position:absolute;right:16px;bottom:18px;display:flex;gap:8px;z-index:-1}
+.bl span{width:74px;height:104px;border-radius:14px;border:3px solid var(--gold);background:linear-gradient(#7a4a22,#4a2615);display:grid;place-items:center;font-size:34px;box-shadow:0 6px 0 #120803;transform:rotate(calc((var(--i) - 1)*7deg)) translateY(calc(var(--i)*var(--i)*3px - 3px));transition:transform .25s}
+.f:hover .bl span{transform:rotate(calc((var(--i) - 1)*11deg)) translateY(-8px)}
+/* counters */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.nums div{text-align:center;background:#0005;border:3px solid #ffd34d33;border-radius:var(--r);padding:20px 10px}
+.nums b{display:block;font:400 clamp(40px,6vw,68px)/1 "Lilita One";color:var(--gold);text-shadow:0 4px 0 #0007}
+.nums span{font:900 13px Nunito;letter-spacing:2px;text-transform:uppercase;color:#f1d9b4}
+/* shots */
+#shots{background:var(--bg)}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.gal button{border:3px solid #ffd34d44;border-radius:18px;overflow:hidden;padding:0;cursor:zoom-in;background:#000;box-shadow:0 8px 0 #120803;transition:transform .2s,border-color .2s}
+.gal button:hover{transform:translateY(-6px) rotate(-1deg);border-color:var(--gold)}
+.gal img{width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .5s}.gal button:hover img{transform:scale(1.07)}
+#lb{position:fixed;inset:0;z-index:90;background:#0d0603f2;display:none;place-items:center;padding:16px;cursor:zoom-out}
+#lb.on{display:grid}#lb img{max-width:100%;max-height:92svh;border-radius:16px;border:4px solid var(--gold);animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
+/* final */
+#go{padding:0;min-height:min(92svh,820px);display:grid;place-items:center;overflow:hidden;isolation:isolate;text-align:center}
+#go .bg{position:absolute;inset:-8% 0;background:url(img/cover.webp) center 22%/cover;z-index:-2;will-change:transform}
+#go::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 70% at 50% 50%,#1b0d0699,#1b0d06f0);z-index:-1}
+#go>.gi{padding:80px 20px;display:flex;flex-direction:column;align-items:center;gap:20px}
+#go img{width:min(460px,70vw)}
+#go h2{font-size:clamp(34px,6vw,64px);margin:0}
+footer{background:#120803;padding:28px 0 calc(28px + var(--sb));text-align:center;font-size:13px;color:#c9a97c}
+footer a{color:var(--gold)}
+/* sticky mobile cta */
+#stick{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 14px calc(10px + var(--sb));background:linear-gradient(#1b0d0600,#1b0d06f2 38%);display:none;justify-content:center;transform:translateY(110%);transition:transform .3s}
+#stick.on{transform:none}#stick .btn{width:min(440px,100%);justify-content:center}
+/* responsive */
+@media(max-width:900px){#nav nav{display:none}#nav .btn{margin-left:auto}.steps{grid-template-columns:1fr;gap:64px;margin-top:70px}.hsel{grid-template-columns:1fr}.stage{aspect-ratio:1/.92;max-width:520px;width:100%;margin-inline:auto}.grid{grid-template-columns:1fr 1fr}.f,.f.w{grid-column:span 1}.nums{grid-template-columns:repeat(2,1fr)}.gal{grid-template-columns:repeat(2,1fr)}#stick{display:flex}footer{padding-bottom:calc(96px + var(--sb))}}
+@media(max-width:620px){body{font-size:16px}.hk{height:46svh;left:-9vw;bottom:5%}.hb{height:47svh;right:-12vw;bottom:5%}.hc{padding-bottom:32svh}.wall{bottom:14%}.grid{grid-template-columns:1fr}.f h3,.f p{max-width:64%}.f{min-height:200px}.gal{grid-template-columns:1fr}.bar{grid-template-columns:80px 1fr 30px}}
+@media(max-height:520px) and (orientation:landscape){:root{--nav:52px}#nav .lg{height:36px}.hc{padding:calc(var(--nav) + 4px) 20px 16svh;gap:8px}.hlogo{width:min(46vw,64svh)}.tag{font-size:clamp(16px,4.6svh,24px)}.cta .btn.big{font-size:20px}.chips{display:none}.hk{height:92svh;left:0}.hb{height:94svh;right:-2vw}.scrl{display:none}#go{min-height:100svh}#stick{display:none}footer{padding-bottom:calc(28px + var(--sb))}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+/* dot 2 */
+section{padding:clamp(52px,7vw,96px) 0}
+.tag{text-shadow:0 3px 0 #5a1606,0 0 6px #3a0e04,0 0 26px #3a0e04,0 0 44px #3a0e04}
+.btn.gh{background:#2a1408d9;box-shadow:inset 0 0 0 3px #ffd34d99,0 10px 24px #0006;backdrop-filter:none}
+.f:not(.w){padding-bottom:158px;min-height:330px}
+.f:not(.w) h3,.f:not(.w) p{max-width:100%}
+.f:not(.w) .art{height:150px!important;right:50%;bottom:6px;transform:translateX(50%)}
+.f:not(.w):hover .art{transform:translateX(50%) scale(1.07) rotate(2deg)}
+.f:not(.w) .bl{left:0;right:0;bottom:22px;justify-content:center}
+.f:not(.w) .pets{left:14px;right:14px;bottom:12px;display:flex;flex-wrap:wrap;justify-content:center;gap:2px 6px}
+.f:not(.w) .pets img{width:54px;height:54px}
+.f.w h3,.f.w p{max-width:58%}
+@media(min-aspect-ratio:1/1){#go .bg{background-image:url(img/cover-w.webp);background-position:center 30%}}
+@media(max-width:620px){.f.w{padding-bottom:158px;min-height:330px}.f.w h3,.f.w p{max-width:100%}.f.w .art{height:150px;right:50%;bottom:0;transform:translateX(50%)}.f.w .aura{width:120px;right:50%;bottom:20px;transform:translateX(50%)}.f h3,.f p{max-width:100%}
+.hc .chips{display:none}.hc .cta .btn.gh{display:none}}
+@media(max-width:620px) and (orientation:portrait){.hk{bottom:9%}.hb{bottom:9%}}
+
+/* dot 3 */
+.h1{margin:0;line-height:0;font-size:0}
+.mq span,.mq i{margin-right:38px}
+h2{text-wrap:balance}.tag{text-wrap:balance}
+:focus-visible{outline:3px solid #fff;outline-offset:3px}
+#nav nav a{opacity:1;text-shadow:0 2px 0 #7a1f08,0 0 10px #7a1f08}
+#hero.off *{animation-play-state:paused!important}
+.thumbs{position:relative}
+.f.w .art{right:18px;height:96%}
+.rnav{display:none;justify-content:center;gap:14px;margin-top:4px}
+.rnav button{width:54px;height:54px;border-radius:50%;border:3px solid #9be04a;background:#16300c;color:#c8ff8a;font:400 30px/1 "Lilita One",sans-serif;cursor:pointer;box-shadow:0 5px 0 #0b1a06;transition:transform .12s}
+.rnav button:hover{transform:translateY(-3px)}.rnav button:active{transform:translateY(3px)}
+@media(hover:hover) and (pointer:fine){.rnav{display:flex}}
+@media(min-width:901px){.thumbs{flex-wrap:wrap;justify-content:center;overflow:visible}}
+#stick{visibility:hidden;pointer-events:none}#stick.on{visibility:visible}#stick .btn{pointer-events:auto}
+#lb .x{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;width:52px;height:52px;border-radius:50%;border:3px solid var(--gold);background:#2a1408;color:var(--gold);font:400 28px/1 "Lilita One",sans-serif;cursor:pointer}
+@media(min-width:621px) and (max-width:1100px) and (min-height:521px){.hk{left:-14vw;height:min(70svh,620px)}.hb{right:-16vw;height:min(72svh,640px)}.hlogo{width:min(520px,62vw)}}
+@media(min-width:621px) and (max-width:900px){.f.w{padding-bottom:158px;min-height:330px}.f.w h3,.f.w p{max-width:100%}.f.w .art{height:150px;right:50%;bottom:0;transform:translateX(50%)}.f.w .aura{width:120px;right:50%;bottom:20px;transform:translateX(50%)}
+.grid .f:last-child{grid-column:1/-1;padding-bottom:24px;min-height:210px}.grid .f:last-child h3,.grid .f:last-child p{max-width:60%}.grid .f:last-child .art{right:30px;bottom:14px;transform:none;height:180px!important}.grid .f:last-child:hover .art{transform:scale(1.07) rotate(2deg)}}
+#heroes{padding-bottom:clamp(20px,3vw,40px)}
+@media(max-width:620px){.tag{font-size:clamp(14px,4.5vw,19px);white-space:nowrap}.f:not(.w),.f.w{min-height:290px}}
+@media(max-width:620px) and (orientation:portrait){.hk{height:41svh}.hb{height:42svh}}
+@media(max-height:520px) and (orientation:landscape){.hands{width:max(820px,104vw);bottom:-8%}.wall{width:max(1000px,120vw)}.tag{background:#2a1408c4;padding:5px 14px;border-radius:99px;text-shadow:none}.hsel{grid-template-columns:minmax(0,.8fr) 1fr;gap:20px}.stage{aspect-ratio:auto;height:80svh;max-width:none}}
+@media(max-height:520px) and (orientation:landscape) and (min-width:700px){.steps{grid-template-columns:repeat(3,1fr);gap:14px}}
+</style>
+<noscript><style>.rv.rv{opacity:1;translate:none;scale:none}</style></noscript>
+</head>
+<body>
+<header id="nav"><div class="wrap">
+  <a href="#hero" aria-label="Meat Hero vs Zombie"><img class="lg" src="img/logo.webp" alt="" width="72" height="46"></a>
+  <nav><a href="#how">Gameplay</a><a href="#trailer">Trailer</a><a href="#heroes">Heroes</a><a href="#foes">Bosses</a><a href="#feat">Features</a></nav>
+  <a class="btn play" href="../">Play now</a>
+</div></header>
+
+<section id="hero">
+  <div class="rays"></div>
+  <img class="lay wall" data-p=".03" src="img/l-wall.webp" alt="" onerror="this.remove()">
+  <div class="grd"></div>
+  <img class="lay hk" data-p=".07" src="img/hx-kira.webp" alt="Kira, the red-haired fighter">
+  <img class="lay hb" data-p="-.07" src="img/hx-boran.webp" alt="Boran, the knight">
+  <canvas id="fx"></canvas>
+  <div class="hc">
+    <h1 class="h1"><img class="hlogo" src="img/logo.webp" alt="Meat Hero vs Zombie" width="1000" height="642"></h1>
+    <p class="tag">Chop zombies. <b>Stack meat.</b> Build your fortress.</p>
+    <div class="cta">
+      <a class="btn big play" href="../"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 3.5v17a1 1 0 0 0 1.5.9l14-8.500a1 1 0 0 0 0-1.800l-14-8.500A1 1 0 0 0 6 3.500z"/></svg>Play free now</a>
+      <a class="btn gh" href="#trailer">Watch trailer</a>
+    </div>
+    <div class="chips"><span>No download</span><span>PC and phone</span><span>22 heroes</span></div>
+  </div>
+  <div class="lay hands" data-p=".02"><img src="img/l-hands.webp" alt="" onerror="this.parentNode.remove()"></div>
+  <a class="scrl" href="#how" aria-label="Scroll down"></a>
+</section>
+
+<div class="mq" aria-hidden="true"><div id="mq"></div></div>
+
+<section id="how"><div class="wrap center">
+  <span class="kick rv">How it plays</span>
+  <h2 class="rv">Chop. <em>Stack.</em> <b>Defend.</b></h2>
+  <p class="lead rv">Every zombie you drop turns into meat. Pile it sky-high on your back, haul it to market, and spend the coins on walls, towers and friends before the next wave hits.</p>
+  <div class="steps">
+    <article class="st tilt rv" style="--i:0"><span class="n">1</span><img class="ic" src="img/weapon.webp" alt="" loading="lazy"><h3>Chop the horde</h3><p>Swing, dash and unleash your ultimate. Chain kills into combos and hit FRENZY for a damage rush.</p></article>
+    <article class="st tilt rv" style="--i:1"><span class="n">2</span><img class="ic" src="img/p-stack.webp" alt="" loading="lazy" ><h3>Stack the meat</h3><p>Balance a wobbling tower of steaks. The taller the tower, the bigger the payday at the butcher stall.</p></article>
+    <article class="st tilt rv" style="--i:2"><span class="n">3</span><img class="ic" src="img/u-rocket-tower.webp" alt="" loading="lazy"><h3>Build the fortress</h3><p>Raise walls, crossbow towers, rocket towers and an angel shrine. Hire woodcutters, porters and heroes.</p></article>
+  </div>
+</div></section>
+
+<section id="trailer"><div class="wrap center">
+  <span class="kick rv">Trailer</span>
+  <h2 class="rv">See it <em>in action</em></h2>
+  <div class="tv rv"><div class="ph" style="background-image:url(img/poster.jpg)"></div><button id="pl" aria-label="Play trailer"><i><svg viewBox="0 0 24 24"><path d="M6 3.5v17a1 1 0 0 0 1.5.9l14-8.500a1 1 0 0 0 0-1.800l-14-8.500A1 1 0 0 0 6 3.500z"/></svg></i></button></div>
+</div></section>
+
+<section id="heroes"><div class="wrap">
+  <div class="center"><span class="kick rv">22 heroes</span>
+  <h2 class="rv">Pick your <em>champion</em></h2>
+  <p class="lead rv">Fighters, archers, mages, assassins, guardians, engineers and tamers. Each one has two skills and an ultimate, can evolve five times, and hides a rare golden form.</p></div>
+  <div class="hsel rv">
+    <div class="stage" id="stg"><span class="cls" id="hcls"></span><img class="big" id="hbig" alt="" src="img/h-kira.webp"></div>
+    <div class="hinfo"><h3 id="hname"></h3><p class="role" id="hrole"></p><div id="hbars"></div>
+      <p style="margin-top:22px"><a class="btn play" href="../">Play this hero</a></p></div>
+  </div>
+  <div class="thumbs" id="ths"></div>
+</div></section>
+
+<section id="foes">
+  <div class="wrap center"><span class="kick rv">Boss gates</span>
+  <h2 class="rv">Beat them. <b>Then own them.</b></h2>
+  <p class="lead rv">Every chapter ends at a boss gate. Earn the stars and the power to enter, win the fight, and the boss you just beat becomes the guard of your keep.</p></div>
+  <div class="row" id="bosses" tabindex="0" role="region" aria-label="Bosses"></div>
+  <div class="rnav" id="rnav"><button type="button" aria-label="Previous bosses">&#8249;</button><button type="button" aria-label="Next bosses">&#8250;</button></div>
+</section>
+
+<section id="feat"><div class="wrap">
+  <div class="center"><span class="kick rv">Always something to chase</span>
+  <h2 class="rv">Grow <em>stronger</em> every run</h2></div>
+  <div class="grid">
+    <article class="f w tilt rv" style="--i:0"><h3>Power auras</h3><p>Every upgrade raises your POWER. Climb six tiers from Rookie to Mythic and watch your aura blaze.</p><div class="aura"><i style="--c:#ffd34d"></i><i></i><i></i></div></article>
+    <article class="f w tilt rv gold" style="--i:1"><h3>Rare golden heroes</h3><p>Win rare chests to unlock golden versions of every hero and pet. 34 to collect, each one makes you stronger.</p><img class="art" src="img/h-seraphine.webp" alt="" loading="lazy"></article>
+    <article class="f tilt rv" style="--i:0"><h3>Blessings</h3><p>Every three waves, pick one of three random boons. No two battles play the same.</p><div class="bl"><span style="--i:0">⚔️</span><span style="--i:1">💥</span><span style="--i:2">❤️</span></div></article>
+    <article class="f tilt rv" style="--i:1"><h3>12 pets</h3><p>Wolves bite, hawks dive, piglets fetch meat, Lumi saves your life.</p><div class="pets" id="pets"></div></article>
+    <article class="f tilt rv" style="--i:2"><h3>Angels and rockets</h3><p>Build an angel shrine and a rocket tower to answer zombie catapults.</p><img class="art" src="img/u-angel.webp" alt="" loading="lazy" style="height:74%"></article>
+  </div>
+  <div class="nums" id="nums">
+    <div class="rv" style="--i:0"><b data-n="22">0</b><span>Heroes</span></div><div class="rv" style="--i:1"><b data-n="63">0</b><span>Levels</span></div><div class="rv" style="--i:2"><b data-n="33">0</b><span>Monsters</span></div><div class="rv" style="--i:3"><b data-n="0" data-t="$0">$0</b><span>To play</span></div>
+  </div>
+</div></section>
+
+<section id="shots"><div class="wrap center">
+  <span class="kick rv">Screenshots</span>
+  <h2 class="rv">Seven worlds to <em>defend</em></h2>
+  <div class="gal" id="gal"></div>
+</div></section>
+
+<section id="go"><div class="bg" data-p=".12"></div><div class="gi">
+  <img class="rv" src="img/logo.webp" alt="Meat Hero vs Zombie" loading="lazy" width="1000" height="642">
+  <h2 class="rv">The horde is <b>hungry.</b> Are you?</h2>
+  <a class="btn big play rv" href="../" style="font-size:clamp(24px,3.4vw,36px)"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 3.5v17a1 1 0 0 0 1.5.9l14-8.500a1 1 0 0 0 0-1.800l-14-8.500A1 1 0 0 0 6 3.500z"/></svg>Play free now</a>
+  <p class="rv" style="color:#f3dcb8">Runs in your browser. No download, no sign&#8209;up.</p>
+</div></section>
+
+<footer><div class="wrap">© 2026 Meat Hero vs Zombie · A free browser game · <a href="../">Play</a> · <a href="#hero">Back to top</a><br>Sound effects and music: CC0 works from OpenGameArt contributors.</div></footer>
+<div id="stick"><a class="btn play" href="../">Play free now</a></div>
+<div id="lb" role="dialog" aria-modal="true" aria-label="Screenshot" tabindex="-1"></div>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)], RM = matchMedia('(prefers-reduced-motion: reduce)').matches, FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
+// ----- data
+const CL = { F: 'Fighter', A: 'Archer', M: 'Mage', S: 'Assassin', G: 'Guardian', E: 'Engineer', T: 'Tamer' };
+const H = [['kira', 'F', 60, 6, .4, 2.4, 6.4, 'Axe fighter with a wide swing'], ['boran', 'F', 110, 10, .48, 2.8, 6.1, 'Knight with sword and shield, tough'], ['wren', 'A', 50, 9.5, .36, 6.8, 7.1, 'Archer with fast single shots'], ['arlo', 'A', 62, 15, .5, 7.2, 6.6, 'Archer with heavy shots'], ['lyra', 'M', 48, 11, .5, 6, 6.7, 'Lightning that jumps to five foes'], ['orin', 'M', 56, 13, .8, 6, 6.1, 'Arcane blasts that chain'], ['nyx', 'S', 48, 5, .27, 2.2, 7.5, 'Fast blades and critical hits'], ['kael', 'S', 55, 5.5, .3, 2.2, 7.3, 'Deadly twin daggers'], ['freya', 'G', 130, 8, .55, 2.6, 5.9, 'Shield maiden who draws zombies in'], ['brom', 'G', 155, 9.5, .62, 2.7, 5.6, 'Unbreakable dwarf guardian'], ['pip', 'E', 45, 12, .85, 6, 6.6, 'Bombs that hit whole groups'], ['gizmo', 'E', 52, 14, .95, 6, 6.3, 'Bigger bombs, bigger booms'], ['sylva', 'T', 60, 6, .42, 2.5, 6.8, 'Fights beside her wolf'], ['thorn', 'T', 82, 8, .5, 2.6, 6.3, 'A beast always at his side'], ['tao', 'F', 85, 6.5, .34, 2.8, 6.9, 'Monk with fast staff combos'], ['akira', 'S', 62, 7, .36, 2.5, 7, 'Samurai with huge crits'], ['mei', 'S', 46, 4.5, .22, 2.3, 7.7, 'Fan dancer with the fastest blades'], ['jax', 'A', 58, 7, .26, 6.6, 6.6, 'Gunslinger with rapid fire'], ['ruby', 'A', 52, 24, .85, 8.2, 6.4, 'Musketeer, long range, heavy hit'], ['ignis', 'M', 54, 14, .85, 6, 6.2, 'Fire mage with big blasts'], ['isolde', 'M', 50, 9, .55, 6, 6.5, 'Frost mage who chains and slows'], ['seraphine', 'M', 60, 10, .6, 6, 6.3, 'Priestess of holy light']];
+const BOSS = [['bossF1', 'Butcher Boss', 'Autumn Plains', 'Summons a pack of shamblers'], ['e2dF1', 'King of the Pass', 'Frost Pass', 'An icy giant with a crystal club'], ['e3dF1', 'Pharaoh of Meat', 'Scorched Sands', 'Ancient, hungry and very rich'], ['e4dF1', 'The Meat King', 'Blighted Marsh', 'Ruler of the rotten swamp'], ['e5dF1', 'Guardian Lion', 'Jade Valley', 'A stone lion that came to life'], ['e6dF1', 'Winter Beast', 'Winter Festival', 'It ate all the presents'], ['e7dF1', 'The Nian', 'Lunar New Year', 'Scared of firecrackers, not of you']];
+const PETS = ['wolf', 'hawk', 'pig', 'fluff', 'mint', 'ember', 'puff', 'nimbus', 'frost', 'chesty', 'shroom', 'lumi'];
+// ----- marquee
+{ const t = ['22 heroes', 'Boss gates', '12 pets', 'Rare golden heroes', 'Combo and frenzy', '63 levels', 'Endless mode', 'No download'].map(x => `<span>${x.toUpperCase()}</span><i>✦</i>`).join(''); $('#mq').innerHTML = t + t + t + t; }
+// ----- nav + sticky cta
+{ const nav = $('#nav'), st = $('#stick'), hero = $('#hero'), go = $('#go'); const f = () => { const y = scrollY; nav.classList.toggle('on', y > 40); const past = y > hero.offsetHeight * .7, end = go.getBoundingClientRect().top < innerHeight * .6; st.classList.toggle('on', past && !end); }; addEventListener('scroll', f, { passive: true }); f(); }
+// ----- reveal
+const done = el => { el.classList.add('in'); setTimeout(() => el.classList.remove('rv', 'in'), RM ? 0 : 1500); }; let reveal = done; if ('IntersectionObserver' in window && !RM) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { done(e.target); io.unobserve(e.target); } }), { threshold: .05 }); reveal = e => io.observe(e); } $$('.rv').forEach(reveal);
+// ----- parallax (scroll + pointer)
+if (!RM) { const L = $$('[data-p]'); let mx = 0, my = 0, tick = 0; const run = () => { tick = 0; const vh = innerHeight; for (const el of L) { const p = +el.dataset.p, r = el.parentElement.getBoundingClientRect(); if (r.bottom < -200 || r.top > vh + 200) continue; const sc = (r.top + r.height / 2 - vh / 2) * -Math.abs(p) * .9, base = el.classList.contains('wall') || el.classList.contains('hands') ? 'translateX(-50%) ' : ''; el.style.transform = `${base}translate3d(${(mx * p * 260).toFixed(1)}px,${(sc + my * Math.abs(p) * 120).toFixed(1)}px,0)`; } }; const ask = () => { if (!tick) tick = requestAnimationFrame(run); }; addEventListener('scroll', ask, { passive: true }); addEventListener('resize', ask); if (FINE) addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; ask(); }, { passive: true }); run(); }
+// ----- tilt cards
+if (FINE && !RM) $$('.tilt').forEach(c => { c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.transform = `perspective(900px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-6px)`; }); c.addEventListener('pointerleave', () => c.style.transform = ''); });
+// ----- hero particles (meat, coins, sparks)
+{ const cv = $('#fx'), hero = $('#hero'); if (cv && !RM) { const x = cv.getContext('2d'); let W = 0, Hh = 0, D = 1, on = true, P = [], last = 0; const size = () => { const ow = W, oh = Hh; D = Math.min(devicePixelRatio || 1, 1.5); W = hero.clientWidth; Hh = hero.clientHeight; cv.width = W * D; cv.height = Hh * D; if (ow) for (const p of P) { p.x *= W / ow; p.y *= Hh / oh; } }; size(); addEventListener('resize', size);
+  const imgs = ['p-steak', 'p-coin', 'p-gem', 'p-star'].map(n => { const i = new Image(); i.src = 'img/' + n + '.webp'; return i; }); const N = innerWidth < 620 ? 10 : Math.round(Math.min(34, Math.max(14, innerWidth / 44)));
+  const mk = (a) => ({ x: Math.random() * W, y: a ? Math.random() * Hh : Hh + 40, s: 14 + Math.random() * 30, v: 16 + Math.random() * 38, r: Math.random() * 6.28, w: (Math.random() - .5) * 1.4, k: Math.floor(Math.random() * 4), ph: Math.random() * 6.28, o: .35 + Math.random() * .5 }); for (let i = 0; i < N; i++) P.push(mk(1));
+  const draw = t => { if (!on) return; const dt = Math.min(.05, (t - last) / 1000 || 0); last = t; x.setTransform(D, 0, 0, D, 0, 0); x.clearRect(0, 0, W, Hh); for (const p of P) { p.y -= p.v * dt; p.r += p.w * dt; p.ph += dt; const px = p.x + Math.sin(p.ph) * 18; if (p.y < -50) Object.assign(p, mk(0)); const im = imgs[p.k]; x.save(); x.globalAlpha = p.o * Math.min(1, (Hh - p.y) / 160); x.translate(px, p.y); x.rotate(p.r); if (im.complete && im.naturalWidth) { const h = p.s * 1.5, w = h * im.naturalWidth / im.naturalHeight; x.drawImage(im, -w / 2, -h / 2, w, h); } else { x.fillStyle = p.k % 2 ? '#ffd34d' : '#fff3d6'; x.beginPath(); x.arc(0, 0, p.s * .16, 0, 7); x.fill(); } x.restore(); } requestAnimationFrame(draw); };
+  if ('IntersectionObserver' in window) new IntersectionObserver(es => { const v = es[0].isIntersecting; hero.classList.toggle('off', !v); if (v && !on) { on = true; last = performance.now(); requestAnimationFrame(draw); } else if (!v) on = false; }).observe(hero); requestAnimationFrame(draw); } }
+// ----- trailer
+$('#pl').addEventListener('click', e => { const tv = e.currentTarget.parentElement, v = document.createElement('video'); v.src = 'img/trailer.mp4'; v.controls = true; v.playsInline = true; v.loop = true; v.muted = true; v.poster = 'img/poster.jpg'; v.setAttribute('aria-label', 'Game trailer'); const old = [...tv.childNodes]; v.onerror = () => { tv.innerHTML = ''; tv.append(...old); }; tv.innerHTML = ''; tv.append(v); v.focus(); v.play().catch(() => { }); });
+// ----- hero selector
+{ const ths = $('#ths'), big = $('#hbig'), stg = $('#stg'); let cur = -1, auto = null, touched = false; const mx = { hp: 155, dmg: 24, spd: 4.5, rng: 8.2, mv: 7.7 };
+  const stop = () => { touched = true; clearInterval(auto); }; ['pointerdown', 'focusin', 'touchstart'].forEach(ev => $('.hsel').addEventListener(ev, stop, { passive: true }));
+  const show = (i, user) => { if (i === cur) return; cur = i; const [id, c, hp, dmg, rate, rng, mv, role] = H[i]; const nm = id[0].toUpperCase() + id.slice(1), url = `img/h-${id}.webp`, sw = () => { if (cur !== i) return; big.classList.remove('sw'); void big.offsetWidth; big.src = url; big.alt = nm + ', ' + CL[c]; big.classList.add('sw'); }; if (big.getAttribute('src') === url) sw(); else { const im = new Image(); im.onload = im.onerror = sw; im.src = url; } stg.style.backgroundImage = `url(img/b-${id}.webp)`; $('#hcls').textContent = CL[c]; $('#hname').textContent = id.toUpperCase(); $('#hrole').textContent = role;
+    const rows = [['Health', hp / mx.hp, hp], ['Damage', dmg / mx.dmg, dmg], ['Speed', (1 / rate) / mx.spd, (1 / rate).toFixed(1)], ['Range', rng / mx.rng, rng], ['Agility', mv / mx.mv, mv]]; const hb = $('#hbars'); if (!hb.children.length) hb.innerHTML = rows.map(r => `<div class="bar"><span>${r[0]}</span><u><i></i></u><b></b></div>`).join(''); [...hb.children].forEach((el, k) => { el.querySelector('i').style.setProperty('--w', Math.round(Math.min(1, rows[k][1]) * 100) + '%'); el.querySelector('b').textContent = rows[k][2]; });
+    [...ths.children].forEach((b, k) => { b.classList.toggle('on', k === i); b.setAttribute('aria-pressed', k === i); }); if (user) stop(); const b = ths.children[i]; if (b && ths.scrollWidth > ths.clientWidth + 4) ths.scrollTo({ left: b.offsetLeft - ths.clientWidth / 2 + b.offsetWidth / 2, behavior: RM ? 'auto' : 'smooth' }); };
+  ths.innerHTML = H.map(h => `<button class="th" style="background-image:url(img/b-${h[0]}.webp)" aria-label="${h[0][0].toUpperCase() + h[0].slice(1)}" aria-pressed="false"><img src="img/t-${h[0]}.webp" alt="" loading="lazy"></button>`).join(''); [...ths.children].forEach((b, i) => b.addEventListener('click', () => show(i, 1))); show(0);
+  if (!RM && 'IntersectionObserver' in window) new IntersectionObserver(es => { clearInterval(auto); if (es[0].isIntersecting && !touched) auto = setInterval(() => show((cur + 1) % H.length), 2600); }, { threshold: .3 }).observe(stg); }
+// ----- bosses, pets, gallery
+$('#bosses').innerHTML = BOSS.map((b, i) => `<article class="boss"><img src="img/m-${b[0]}.webp" alt="${b[1]}" loading="lazy"><h3>${b[1]}</h3><p>${b[3]}</p><small>${b[2]}</small></article>`).join('');
+{ const row = $('#bosses'); $$('#rnav button').forEach((b, k) => b.addEventListener('click', () => row.scrollBy({ left: (k ? 1 : -1) * row.clientWidth * .7, behavior: RM ? 'auto' : 'smooth' }))); }
+$('#pets').innerHTML = PETS.map((p, i) => `<img src="img/m-pet${p}S1.webp" alt="" loading="lazy" style="--i:${i}">`).join('');
+$('#gal').innerHTML = [0, 1, 2, 3, 4, 5].map(i => `<button class="rv" style="--i:${i % 3}" aria-label="Open screenshot ${i + 1}"><img src="img/s${i}.webp" alt="Gameplay screenshot ${i + 1}" loading="lazy" width="1280" height="720"></button>`).join('');
+$$('#gal .rv').forEach(reveal);
+{ const lb = $('#lb'); let from = null; const shut = () => { if (!lb.classList.contains('on')) return; lb.classList.remove('on'); document.documentElement.style.overflow = ''; if (from) from.focus(); }; $('#gal').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; from = b; lb.innerHTML = '<button class="x" type="button" aria-label="Close">&#10005;</button>'; const li = new Image(); li.alt = 'Gameplay screenshot'; li.src = b.querySelector('img').src; lb.append(li); lb.classList.add('on'); document.documentElement.style.overflow = 'hidden'; lb.querySelector('.x').focus(); }); lb.addEventListener('click', shut); addEventListener('keydown', e => { if (e.key === 'Escape') shut(); }); }
+// ----- counters
+{ const els = $$('#nums b'); const go = el => { const n = +el.dataset.n; if (el.dataset.t) { el.textContent = el.dataset.t; return; } if (RM) { el.textContent = n; return; } const t0 = performance.now(); const f = t => { const k = Math.min(1, (t - t0) / 1300), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(n * e); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }; if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { go(e.target); io.unobserve(e.target); } }), { threshold: .6 }); els.forEach(e => io.observe(e)); } else els.forEach(go); }
+})();
+</script>
+</body>
+</html>
