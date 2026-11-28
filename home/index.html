@@ -306,6 +306,190 @@ h2.rv.sp{opacity:1;translate:none;scale:none}
 @media(min-width:1380px) and (min-height:700px){#twr{display:flex}}
 @media(max-width:620px){#chop{top:10px;left:10px;padding:4px 10px 4px 6px}#chop img{width:34px}#chop b{font-size:30px}#chopgo{top:70px;left:10px;font-size:15px}#hint{font-size:17px;bottom:calc(20px + var(--sb))}.pt{font-size:24px}.pt.c{font-size:30px}.sl{width:190px;margin-left:-95px}}
 @media(max-height:520px) and (orientation:landscape){#chop{top:8px;left:8px;padding:3px 9px 3px 5px}#chop img{width:30px}#chop b{font-size:26px}#chopgo{top:58px;left:8px;font-size:14px}#hint{bottom:8px;font-size:15px;padding:6px 12px}}
+
+/* dot 6: re chuot toi dau cung co hieu ung */
+#prog{position:fixed;left:0;top:0;right:0;height:4px;z-index:70;background:linear-gradient(90deg,#8fe02a,#ffd34d,#ff8a1e);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+#trail{position:fixed;inset:0;width:100%;height:100%;z-index:95;pointer-events:none}
+#cur{position:fixed;left:0;top:0;z-index:96;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:2.5px solid #ffd34d;box-shadow:0 0 14px #ffd34d88,inset 0 0 10px #ffd34d44;pointer-events:none;opacity:0;display:grid;place-items:center;transition:width .22s cubic-bezier(.2,1.5,.4,1),height .22s cubic-bezier(.2,1.5,.4,1),margin .22s cubic-bezier(.2,1.5,.4,1),background .2s,opacity .2s,border-color .2s,translate .22s cubic-bezier(.2,1.5,.4,1);will-change:transform}
+#cur.on{opacity:1}
+#cur.act{width:66px;height:66px;margin:-33px 0 0 -33px;background:#ffd34d2e;border-color:#fff}
+#cur{translate:0 0}#cur.lb{width:62px;height:62px;margin:-31px 0 0 -31px;background:#2a1408e6;border-color:#ffd34d;translate:46px 46px}
+#cur.dn{width:28px;height:28px;margin:-14px 0 0 -14px;background:#ffd34d99}
+#cur span{font:400 14px/1 "Lilita One",sans-serif;letter-spacing:1px;color:#ffd34d;opacity:0;transition:opacity .15s}
+#cur.lb span{opacity:1}
+@media not ((hover:hover) and (pointer:fine)){#cur{display:none}}
+.btn,.rnav button{transition:transform .12s,box-shadow .12s,translate .22s cubic-bezier(.2,1.5,.4,1)}
+/* den roi theo chuot trong tung phan */
+#how,#trailer,#heroes,#foes,#feat,#shots{isolation:isolate;--sx:50%;--sy:-400px}
+#how::before,#trailer::before,#heroes::before,#foes::before,#feat::before,#shots::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(520px circle at var(--sx) var(--sy),#ffb44a24,#ff8a1e0d 45%,#0000 70%)}
+#foes::before{background:radial-gradient(520px circle at var(--sx) var(--sy),#9be22d26,#9be22d0d 45%,#0000 70%)}
+#hero{--sx:50%;--sy:-400px}
+#hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(420px circle at var(--sx) var(--sy),#fff7,#fff0 70%);mix-blend-mode:soft-light}
+/* dau trang */
+.h1{transition:transform .25s ease-out;transform-style:preserve-3d;will-change:transform}
+.hk,.hb{pointer-events:auto;transition:filter .25s,scale .3s cubic-bezier(.2,1.6,.4,1);transform-origin:50% 100%;cursor:pointer}
+.hk:hover,.hb:hover{filter:drop-shadow(0 22px 18px #0007) drop-shadow(0 0 26px #ffe27a) brightness(1.08);scale:1.035}
+.zh{transform-origin:50% 100%;transition:rotate .3s ease-out}
+#say{position:absolute;z-index:6;pointer-events:none;translate:-50% -100%;font:400 22px/1.05 "Lilita One",sans-serif;color:var(--ink);background:#fff;padding:12px 18px;border-radius:22px;box-shadow:0 5px 0 #0003,0 12px 24px #0005;white-space:nowrap;opacity:0;scale:.4;transform-origin:50% 100%;transition:opacity .15s,scale .28s cubic-bezier(.2,1.8,.4,1)}
+#say::after{content:"";position:absolute;left:50%;top:100%;margin-left:-10px;border:10px solid #0000;border-top-color:#fff}
+#say.on{opacity:1;scale:1}
+.chips span{transition:translate .2s cubic-bezier(.2,1.6,.4,1),background .2s,color .2s;pointer-events:auto}
+.chips span:hover{translate:0 -5px;background:var(--gold);color:var(--ink)}
+#nav nav a{transition:translate .2s cubic-bezier(.2,1.6,.4,1),color .2s}
+#nav nav a:hover{translate:0 -3px;color:var(--gold)}
+#nav .lg{transition:.3s,rotate .3s cubic-bezier(.2,1.8,.4,1),scale .3s cubic-bezier(.2,1.8,.4,1)}
+#nav a:hover .lg{rotate:-6deg;scale:1.12}
+.mq span{display:inline-block;transition:scale .2s cubic-bezier(.2,1.8,.4,1),color .2s}
+.mq span:hover{scale:1.22;color:#a2210a}
+/* chu tieu de: re qua tung chu thi nay */
+h2.dn .ch{opacity:1;animation:none;transition:color .3s}
+h2.dn .ch:hover{animation:jmp .5s cubic-bezier(.2,1.6,.4,1);color:#fff}
+@keyframes jmp{0%{translate:0 0;rotate:0deg;scale:1}35%{translate:0 -.32em;rotate:-9deg;scale:1.18}70%{translate:0 .05em;rotate:4deg;scale:.96}100%{translate:0 0;rotate:0deg;scale:1}}
+.lead{transition:color .3s}.lead:hover{color:#fff}
+/* the: vet sang quet qua khi re vao */
+.st::before,.f::before,.boss::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;background:linear-gradient(115deg,#fff0 42%,#fff3 50%,#fff0 58%) 220% 0/260% 100% no-repeat;transition:background-position 0s}
+.st:hover::before,.f:hover::before,.boss:hover::before{background-position:-120% 0;transition:background-position .8s ease-out}
+.st{transition:border-color .25s}.st:hover{border-color:var(--gold)}
+.st .ic{transition:scale .35s cubic-bezier(.2,1.8,.4,1),rotate .35s cubic-bezier(.2,1.8,.4,1)}
+.st:hover .ic{scale:1.2;rotate:-9deg}
+.st .n{transition:color .3s,scale .3s cubic-bezier(.2,1.8,.4,1);transform-origin:0 0}.st:hover .n{color:#ffd34d77;scale:1.25}
+.f{transition:border-color .25s}.f:hover{border-color:#ffd34daa}
+.f h3{transition:translate .25s cubic-bezier(.2,1.6,.4,1)}.f:hover h3{translate:6px 0}
+.pets img{pointer-events:auto;cursor:pointer}
+.pets img:hover{animation:hop .55s cubic-bezier(.2,1.5,.4,1)}
+@keyframes hop{0%,100%{translate:0 0;rotate:0deg;scale:1}40%{translate:0 -22px;rotate:-12deg;scale:1.35}70%{translate:0 2px;rotate:6deg;scale:.95}}
+.bl span{transition:transform .25s,scale .25s cubic-bezier(.2,1.8,.4,1),translate .25s cubic-bezier(.2,1.8,.4,1),box-shadow .25s;pointer-events:auto;cursor:pointer}
+.bl span:hover{scale:1.22;translate:0 -16px;box-shadow:0 6px 0 #120803,0 0 26px #ffd34d}
+.nums>div{transition:border-color .25s,translate .25s cubic-bezier(.2,1.6,.4,1)}.nums>div:hover{border-color:var(--gold);translate:0 -6px}
+.nums b{transition:scale .3s cubic-bezier(.2,1.8,.4,1)}.nums>div:hover b{scale:1.14}
+/* khung trailer, chon tuong */
+.tv{transition:transform .2s ease-out;will-change:transform}
+.stage{--px:0;--py:0;transition:border-color .25s}.stage:hover{border-color:var(--gold)}
+.stage .big{translate:calc(var(--px)*-22px) calc(var(--py)*-10px);transition:translate .25s ease-out}
+.stage::before{translate:calc(var(--px)*14px) calc(var(--py)*8px);transition:translate .25s ease-out}
+.th{transition:transform .2s,scale .14s ease-out,translate .14s ease-out,border-color .2s,box-shadow .2s;transform-origin:50% 100%}
+.bar{transition:translate .2s}.bar:hover{translate:6px 0}.bar b{transition:scale .2s cubic-bezier(.2,1.8,.4,1)}.bar:hover b{scale:1.35}.bar:hover u i{filter:brightness(1.3) saturate(1.3)}
+#hname{transition:letter-spacing .3s,text-shadow .3s}#hname:hover{letter-spacing:6px;text-shadow:0 0 30px #ffd34d}
+/* trum gam */
+.boss{transform-style:preserve-3d}
+.boss:hover img{animation:roar .6s ease-in-out}
+@keyframes roar{0%,100%{rotate:0deg;scale:1}18%{rotate:-7deg;scale:1.14}36%{rotate:6deg;scale:1.18}54%{rotate:-5deg;scale:1.14}72%{rotate:3deg;scale:1.08}}
+.boss small{transition:scale .2s cubic-bezier(.2,1.8,.4,1)}.boss:hover small{scale:1.12}
+/* anh chup: phong to tai cho con tro */
+.gal button:hover img{transform:scale(1.3)}
+.gal button{position:relative}
+.gal button::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,#fff0 42%,#fff4 50%,#fff0 58%) 220% 0/260% 100% no-repeat;pointer-events:none}
+.gal button:hover::after{background-position:-120% 0;transition:background-position .8s ease-out}
+footer a{display:inline-block;transition:translate .2s cubic-bezier(.2,1.6,.4,1)}footer a:hover{translate:0 -3px}
+#go h2 b{display:inline-block}
+
+/* dot 7: moi phan mot mau, chuyen tuong, bieu tuong that */
+section{isolation:isolate}
+#how{background:radial-gradient(#ffffff1f 1.5px,#0000 2.2px) 0 0/28px 28px,radial-gradient(90% 70% at 50% 0,#33a6ff 0,#1668dc 48%,#0b2f86 100%)}
+#how .lead{color:#eaf4ff}#how h2 b{color:#a8ff5e}
+.st:nth-child(1){background:linear-gradient(160deg,#ff6f42,#b3240f);border-color:#ffb9a1;box-shadow:0 10px 0 #5f1206,0 30px 50px #0007}
+.st:nth-child(2){background:linear-gradient(160deg,#ffbd35,#d2620a);border-color:#ffe59c;box-shadow:0 10px 0 #7a3703,0 30px 50px #0007}
+.st:nth-child(3){background:linear-gradient(160deg,#66cc22,#2a7a0c);border-color:#cfff9c;box-shadow:0 10px 0 #174a05,0 30px 50px #0007}
+.st h3{color:#fff;text-shadow:0 3px 0 #0004}.st p{color:#fff;text-shadow:0 1px 0 #0005}.st .n{color:#ffffff38}.st:hover .n{color:#ffffff80}.st:hover{border-color:#fff}
+#trailer{background:radial-gradient(#ffffff26 1.2px,#0000 2px) 0 0/34px 34px,radial-gradient(80% 70% at 50% 30%,#7a34ea 0,#3f169a 50%,#1a0747 100%)}
+#trailer .kick{background:#ff7ac8;box-shadow:0 4px 0 #a82a78}#trailer h2 em{color:#ffb3e2}
+#heroes{background:linear-gradient(#141a4a,#0d1030 60%,#0b0e28);--acc:#ff5a3c}
+#heroes::after{content:"";position:absolute;left:50%;top:38%;width:min(1100px,120vw);height:min(760px,90vw);translate:-50% -30%;border-radius:50%;background-color:var(--acc);filter:blur(120px);opacity:.3;z-index:-1;pointer-events:none;transition:background-color .7s}
+#heroes .kick{background:var(--acc);color:#fff;box-shadow:0 4px 0 #0006;transition:background-color .5s}#heroes h2 em{color:var(--acc);transition:color .5s}
+#foes{background:radial-gradient(90% 60% at 50% 30%,#2f8f1e 0,#17591a 45%,#0a3020 100%)}
+.boss{background:linear-gradient(165deg,#3b6a17,#17330c);border-color:#b5f24a88}
+#feat{background:radial-gradient(#ffffff1c 1.4px,#0000 2.2px) 0 0/30px 30px,radial-gradient(90% 70% at 50% 35%,#b0287f 0,#63176e 45%,#2a0b45 100%)}
+#feat .kick{background:#6fe3ff;box-shadow:0 4px 0 #1b7f9c}#feat h2 em{color:#ffe27a}
+.grid .f:nth-child(1){background:linear-gradient(160deg,#6a48ea,#2a1780);border-color:#b9a6ff88}
+.grid .f:nth-child(3){background:linear-gradient(160deg,#e2475a,#7a1023);border-color:#ffb3bd88}
+.grid .f:nth-child(4){background:linear-gradient(160deg,#16b3a4,#0a5a63);border-color:#9ff5ea88}
+.grid .f:nth-child(5){background:linear-gradient(160deg,#42aeff,#1b55b8);border-color:#bfe2ff88}
+.f h3{color:#fff;text-shadow:0 3px 0 #0004}.f.gold h3{color:#fff3b0}.f p{color:#fff}
+.nums div{background:#00000047}
+.nums>div:nth-child(1){border-color:#ffd34d88}.nums>div:nth-child(2){border-color:#a8ff5e88}.nums>div:nth-child(3){border-color:#ff8fd288}.nums>div:nth-child(4){border-color:#6fe3ff88}
+.nums>div:nth-child(2) b{color:#a8ff5e}.nums>div:nth-child(3) b{color:#ff8fd2}.nums>div:nth-child(4) b{color:#6fe3ff}.nums span{color:#fff}
+#shots{background:radial-gradient(90% 70% at 50% 0,#14b8aa 0,#0b6c78 50%,#083848 100%)}
+#shots .kick{background:#fff;box-shadow:0 4px 0 #7fb8b8}#shots h2 em{color:#ffe27a}
+.gal button{border-color:#ffffff66}
+#trailer,#heroes,#foes,#feat,#shots,#go{border-radius:clamp(26px,5vw,64px) clamp(26px,5vw,64px) 0 0;margin-top:calc(-1*clamp(26px,5vw,64px));overflow:clip}
+#how{padding-bottom:calc(clamp(52px,7vw,96px) + clamp(26px,5vw,64px))}
+#trailer,#heroes,#foes,#feat,#shots{padding-bottom:calc(clamp(52px,7vw,96px) + clamp(26px,5vw,64px))}
+#heroes{padding-bottom:calc(clamp(40px,5vw,70px) + clamp(26px,5vw,64px))}
+.lead{color:#fff}
+/* bieu tuong blessings */
+.bl span{overflow:hidden;background:linear-gradient(#ffe9b0,#f2b84a);border-color:#fff3c9}
+.bl span img{width:84%;filter:drop-shadow(0 3px 2px #0006)}
+.bl span.fl{animation:fl .5s ease-in-out}
+@keyframes fl{0%,100%{rotate:y 0deg}50%{rotate:y 90deg}}
+/* chuyen tuong */
+.stage{background:#141a4a;border-color:var(--acc,#ffd34d);box-shadow:0 12px 0 #05071a,0 40px 70px #000a,0 0 60px -10px var(--acc,#ffd34d);transition:border-color .5s,box-shadow .5s}
+.stage::before{content:none}
+.sc{position:absolute;inset:0;background:#141a4a center/cover;z-index:0}
+.sc::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 100%,#0b0e28cc,#0000 70%),linear-gradient(#0000 55%,#0b0e28aa);z-index:1}
+.sc.in{z-index:1;animation:var(--an,wR) .62s cubic-bezier(.7,0,.2,1) both}
+@keyframes wR{from{clip-path:polygon(130% 0,130% 0,100% 100%,100% 100%)}to{clip-path:polygon(0 0,130% 0,100% 100%,-30% 100%)}}
+@keyframes wL{from{clip-path:polygon(-30% 0,-30% 0,0 100%,0 100%)}to{clip-path:polygon(-30% 0,100% 0,130% 100%,0 100%)}}
+@keyframes wI{from{clip-path:circle(0% at 50% 62%)}to{clip-path:circle(125% at 50% 62%)}}
+.sc.in .big{animation:hin .7s .14s cubic-bezier(.2,1.35,.3,1) both}
+@keyframes hin{0%{translate:var(--dx,60%) 0;scale:.78;opacity:0;filter:blur(8px) drop-shadow(0 18px 14px #000a)}55%{opacity:1;filter:blur(0) drop-shadow(0 18px 14px #000a)}100%{opacity:1}}
+.sc.out .big{animation:hout .34s ease-in forwards}
+@keyframes hout{to{translate:var(--ox,-50%) 0;scale:.86;opacity:0;filter:blur(6px)}}
+.stage .ws{position:absolute;top:-20%;bottom:-20%;left:0;width:34%;z-index:4;pointer-events:none;background:linear-gradient(90deg,#fff0,#fff 45%,var(--acc,#ffd34d) 55%,#fff0);filter:blur(6px);rotate:14deg;animation:ws .62s cubic-bezier(.7,0,.2,1) both}
+@keyframes ws{from{translate:var(--wf,330%) 0;opacity:1}85%{opacity:1}to{translate:var(--wt,-130%) 0;opacity:0}}
+.stage .cls{background:var(--acc,#ffd34d);color:#fff;z-index:5;text-shadow:0 1px 0 #0006;transition:background-color .4s}
+.stage .cls.tx{animation:pop2 .45s cubic-bezier(.2,1.8,.4,1)}
+@keyframes pop2{from{scale:0;rotate:-20deg}}
+.hinfo h3{color:#fff;text-shadow:0 5px 0 #0007,0 0 40px var(--acc,#ffd34d);overflow:hidden;padding-bottom:.08em}
+.hinfo h3.tx,.hinfo .role.tx{animation:tx .5s cubic-bezier(.2,1.2,.3,1) both}.hinfo .role.tx{animation-delay:.08s}
+@keyframes tx{from{translate:0 60%;opacity:0;letter-spacing:.2em}}
+.bar u i{background:linear-gradient(90deg,var(--acc,#ff8a1e),#ffe27a);transition:width .7s cubic-bezier(.2,.8,.2,1),background .5s}
+.bar b{color:#fff}.hinfo .role{color:#e6e9ff}
+.th.on{border-color:#fff;box-shadow:0 10px 20px #000a,0 0 0 3px var(--acc,#ffd34d),0 0 24px var(--acc,#ffd34d)}
+#twr b{box-shadow:0 4px 0 #a86b00,0 8px 16px #0007}
+@media(max-width:900px){.grid .f.w .art{height:150px;right:50%;bottom:0;transform:translateX(50%)}}
+
+/* dot 8: how it plays so le + canh that, hao quang that, dai thu cung, hinh nen */
+.hw{display:grid;gap:clamp(44px,6vw,84px);margin-top:clamp(40px,5vw,64px);text-align:left}
+.hr{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(22px,4.5vw,64px);align-items:center;position:relative}
+.hr:nth-child(2){grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}.hr:nth-child(2) .hm{order:2}
+.hm{position:relative;border-radius:26px;padding:10px;background:linear-gradient(145deg,var(--c1),var(--c2));box-shadow:0 12px 0 var(--c3),0 36px 60px #0008;rotate:var(--rt);transition:rotate .35s cubic-bezier(.2,1.5,.4,1),scale .35s cubic-bezier(.2,1.5,.4,1)}
+.hm:hover{rotate:0deg;scale:1.03}
+.hm video{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:18px;background:#000}
+.hn{position:absolute;left:-18px;top:-26px;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font:400 44px/1 "Lilita One",sans-serif;color:#fff;background:var(--c1);border:5px solid #fff;box-shadow:0 6px 0 var(--c3);rotate:-10deg;z-index:2;transition:rotate .35s cubic-bezier(.2,1.8,.4,1),scale .35s cubic-bezier(.2,1.8,.4,1)}
+.hm:hover .hn{rotate:8deg;scale:1.15}
+.hi{position:absolute;right:-26px;bottom:-34px;height:150px;width:auto;max-width:none;filter:drop-shadow(0 12px 10px #0009);animation:bob 4.5s ease-in-out infinite;z-index:2;pointer-events:none}
+.ht h3{font-size:clamp(34px,4.6vw,58px);color:#fff;text-shadow:0 4px 0 #0005;line-height:1}
+.ht p{font-size:clamp(16px,1.5vw,19px);color:#eaf4ff;margin:12px 0 16px;max-width:30em}
+.hp{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.hp li{font:900 13px/1 Nunito,sans-serif;letter-spacing:1px;text-transform:uppercase;background:#ffffff22;border:2px solid #ffffff66;padding:7px 12px;border-radius:99px;color:#fff;transition:translate .2s cubic-bezier(.2,1.6,.4,1),background .2s,color .2s}
+.hp li:hover{translate:0 -4px;background:#fff;color:#0b2f86}
+.hr.rv.rv:nth-child(odd){translate:-70px 0}.hr.rv.rv:nth-child(even){translate:70px 0}.hr.rv.rv.in{translate:none}
+@media(max-width:760px){.hr,.hr:nth-child(2){grid-template-columns:1fr;gap:34px}.hr:nth-child(2) .hm{order:0}.hi{height:100px;right:-6px;bottom:-28px}.hn{left:-6px;top:-20px;width:58px;height:58px;font-size:32px}.ht{text-align:center}.hp{justify-content:center}.ht p{margin-inline:auto}.hr.rv.rv:nth-child(odd),.hr.rv.rv:nth-child(even){translate:0 40px}.hr.rv.rv.in{translate:none}}
+/* hao quang that */
+.tier{position:absolute;right:26px;bottom:20px;width:176px;z-index:-1;text-align:center;--tc:#fff}
+.tier img{width:150px;height:150px;margin:0 auto;border-radius:50%;object-fit:cover;border:5px solid var(--tc);box-shadow:0 0 30px var(--tc),0 8px 0 #0005;transition:border-color .4s,box-shadow .4s}
+.tier.pp img{animation:tpop .5s cubic-bezier(.2,1.7,.4,1)}
+@keyframes tpop{0%{scale:.7;rotate:-10deg}100%{scale:1;rotate:0deg}}
+.tier b{position:absolute;left:50%;top:126px;translate:-50% 0;font:400 16px/1 "Lilita One",sans-serif;letter-spacing:1.5px;color:#1b0d06;background:var(--tc);padding:6px 12px;border-radius:99px;box-shadow:0 4px 0 #0006;white-space:nowrap;transition:background-color .4s}
+.tdots{display:flex;gap:5px;justify-content:center;margin-top:14px}.tdots i{width:9px;height:9px;border-radius:50%;background:#ffffff44;transition:background .3s,scale .3s}.tdots i.on{background:var(--tc);scale:1.4}
+@media(max-width:900px){.f.w .tier{right:50%;bottom:10px;translate:50% 0;width:150px}.f.w .tier img{width:112px;height:112px}.f.w .tier b{top:92px;font-size:14px}.f.w .tdots{margin-top:12px}}
+/* the combo */
+.cbo{position:absolute;left:0;right:0;bottom:26px;text-align:center;z-index:-1}
+.cbo b{display:block;font:400 clamp(30px,3.4vw,44px)/1 "Lilita One",sans-serif;color:#ff5fd0;-webkit-text-stroke:2px #5a0b46;paint-order:stroke fill;text-shadow:0 4px 0 #0006}
+.cbo b.pp{animation:bump .25s}
+.cbo i{display:inline-block;margin-top:8px;font:400 24px/1 "Lilita One",sans-serif;font-style:normal;color:#ffe27a;text-shadow:0 3px 0 #7a1f08,0 0 20px #ff4d1a;opacity:.25;transition:opacity .2s,scale .3s cubic-bezier(.2,1.8,.4,1)}
+.cbo.fr i{opacity:1;scale:1.35}
+/* hinh nen phan tinh nang + dai thu cung */
+#feat{background:radial-gradient(#ffffff1c 1.4px,#0000 2.2px) 0 0/30px 30px,linear-gradient(#8a1f7ae6,#4a1268ee 50%,#22083ef7),url(img/cover-w.webp) center 30%/cover}
+.petz{margin-top:18px;position:relative;border-radius:var(--r);padding:26px 22px 22px;border:3px solid #9ff5ea99;background:linear-gradient(#0c7a78d9,#0a4a5cf0),url(img/b-sylva.webp) center/cover;box-shadow:0 8px 0 #052a30,0 24px 40px #0008;overflow:hidden;text-align:center}
+.petz h3{font-size:clamp(28px,3.6vw,46px);color:#fff;text-shadow:0 4px 0 #0005}.petz>p{color:#e3fffb;margin:4px auto 18px;max-width:40em}
+.pz{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.pc{position:relative;text-align:center;background:#ffffff1c;border:2px solid #ffffff40;border-radius:18px;padding:12px 6px 12px;transition:translate .25s cubic-bezier(.2,1.6,.4,1),background .25s,border-color .25s,box-shadow .25s;cursor:pointer}
+.pc img{height:96px;width:auto;margin:0 auto 6px;filter:drop-shadow(0 8px 6px #0008);animation:bob 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*-.4s)}
+.pc b{display:block;font:400 20px/1.1 "Lilita One",sans-serif;color:#ffe27a;text-shadow:0 2px 0 #0006}.pc span{display:block;font-size:12.5px;line-height:1.25;color:#effffc;margin-top:3px}
+.pc:hover{translate:0 -9px;background:#ffffff38;border-color:#fff;box-shadow:0 0 26px #9ff5ea88}.pc:hover img{animation:hop .55s cubic-bezier(.2,1.5,.4,1)}
+@media(max-width:900px){.pz{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:620px){.petz{padding:20px 12px 14px}.pz{grid-template-columns:repeat(3,1fr);gap:8px}.pc img{height:70px}.pc b{font-size:16px}.pc span{font-size:11px}}
 </style>
 <noscript><style>.rv.rv{opacity:1;translate:none;scale:none}</style></noscript>
 </head>
@@ -337,6 +521,7 @@ h2.rv.sp{opacity:1;translate:none;scale:none}
   <div id="chop"><img src="img/p-steak.webp" alt=""><b id="chopn">0</b><span>zombies<br>chopped</span></div>
   <a id="chopgo" class="btn play" href="../">Nice! Play the real game</a>
   <div id="hint" aria-hidden="true">Chop a zombie!</div>
+  <div id="say" aria-hidden="true"></div>
   <a class="scrl" href="#how" aria-label="Scroll down"></a>
 </section>
 
@@ -346,10 +531,10 @@ h2.rv.sp{opacity:1;translate:none;scale:none}
   <span class="kick rv">How it plays</span>
   <h2 class="rv">Chop. <em>Stack.</em> <b>Defend.</b></h2>
   <p class="lead rv">Every zombie you drop turns into meat. Pile it sky-high on your back, haul it to market, and spend the coins on walls, towers and friends before the next wave hits.</p>
-  <div class="steps">
-    <article class="st tilt rv" style="--i:0"><span class="n">1</span><img class="ic" src="img/weapon.webp" alt="" loading="lazy"><h3>Chop the horde</h3><p>Swing, dash and unleash your ultimate. Chain kills into combos and hit FRENZY for a damage rush.</p></article>
-    <article class="st tilt rv" style="--i:1"><span class="n">2</span><img class="ic" src="img/p-stack.webp" alt="" loading="lazy" ><h3>Stack the meat</h3><p>Balance a wobbling tower of steaks. The taller the tower, the bigger the payday at the butcher stall.</p></article>
-    <article class="st tilt rv" style="--i:2"><span class="n">3</span><img class="ic" src="img/u-rocket-tower.webp" alt="" loading="lazy"><h3>Build the fortress</h3><p>Raise walls, crossbow towers, rocket towers and an angel shrine. Hire woodcutters, porters and heroes.</p></article>
+  <div class="hw">
+    <article class="hr rv" style="--c1:#ff6f42;--c2:#b3240f;--c3:#5f1206;--rt:-2deg"><div class="hm"><span class="hn">1</span><video class="hv" muted loop playsinline preload="none" poster="img/v-chop.jpg" src="img/v-chop.mp4" aria-label="Chop the horde gameplay"></video><img class="hi" src="img/weapon.webp" alt="" loading="lazy"></div><div class="ht"><h3>Chop the horde</h3><p>Swing, dash and unleash your ultimate. Every zombie you drop bursts into meat. Chain kills into combos and hit FRENZY for a damage rush.</p><ul class="hp"><li>2 skills</li><li>Ultimate</li><li>Combo</li><li>Frenzy</li></ul></div></article>
+    <article class="hr rv" style="--c1:#ffbd35;--c2:#d2620a;--c3:#7a3703;--rt:2deg"><div class="hm"><span class="hn">2</span><video class="hv" muted loop playsinline preload="none" poster="img/v-stack.jpg" src="img/v-stack.mp4" aria-label="Stack the meat gameplay"></video><img class="hi" src="img/p-stack.webp" alt="" loading="lazy"></div><div class="ht"><h3>Stack the meat</h3><p>Pile the steaks sky-high on your back and haul the wobbling tower to the butcher stall. The taller it gets, the bigger the payday.</p><ul class="hp"><li>Carry up to 64</li><li>Sell for coins</li><li>Porters help</li></ul></div></article>
+    <article class="hr rv" style="--c1:#66cc22;--c2:#2a7a0c;--c3:#174a05;--rt:-1.5deg"><div class="hm"><span class="hn">3</span><video class="hv" muted loop playsinline preload="none" poster="img/v-build.jpg" src="img/v-build.mp4" aria-label="Build the fortress gameplay"></video><img class="hi" src="img/u-rocket-tower.webp" alt="" loading="lazy"></div><div class="ht"><h3>Build the fortress</h3><p>Spend the coins on walls, crossbow towers, rocket towers and an angel shrine. Hire woodcutters, porters and heroes before the next wave hits.</p><ul class="hp"><li>Walls</li><li>Towers</li><li>Allies</li><li>Angel shrine</li></ul></div></article>
   </div>
 </div></section>
 
@@ -364,7 +549,7 @@ h2.rv.sp{opacity:1;translate:none;scale:none}
   <h2 class="rv">Pick your <em>champion</em></h2>
   <p class="lead rv">Fighters, archers, mages, assassins, guardians, engineers and tamers. Each one has two skills and an ultimate, can evolve five times, and hides a rare golden form.</p></div>
   <div class="hsel rv">
-    <div class="stage" id="stg"><span class="cls" id="hcls"></span><img class="big" id="hbig" alt="" src="img/h-kira.webp"></div>
+    <div class="stage" id="stg"><span class="cls" id="hcls"></span><div class="sc" style="background-image:url(img/b-kira.webp)"><img class="big" id="hbig" alt="Kira, Fighter" src="img/h-kira.webp"></div></div>
     <div class="hinfo"><h3 id="hname"></h3><p class="role" id="hrole"></p><div id="hbars"></div>
       <p style="margin-top:22px"><a class="btn play" href="../">Play this hero</a></p></div>
   </div>
@@ -383,12 +568,13 @@ h2.rv.sp{opacity:1;translate:none;scale:none}
   <div class="center"><span class="kick rv">Always something to chase</span>
   <h2 class="rv">Grow <em>stronger</em> every run</h2></div>
   <div class="grid">
-    <article class="f w tilt rv" style="--i:0"><h3>Power auras</h3><p>Every upgrade raises your POWER. Climb six tiers from Rookie to Mythic and watch your aura blaze.</p><div class="aura"><i style="--c:#ffd34d"></i><i></i><i></i></div></article>
+    <article class="f w tilt rv" style="--i:0"><h3>Power auras</h3><p>Every upgrade raises your POWER. Climb six tiers from Rookie to Mythic and watch your aura blaze.</p><div class="tier" id="tier"><img src="img/hq-0.webp" alt="" width="260" height="260"><b>ROOKIE</b><div class="tdots"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></article>
     <article class="f w tilt rv gold" style="--i:1"><h3>Rare golden heroes</h3><p>Win rare chests to unlock golden versions of every hero and pet. 34 to collect, each one makes you stronger.</p><img class="art" src="img/h-seraphine.webp" alt="" loading="lazy"></article>
-    <article class="f tilt rv" style="--i:0"><h3>Blessings</h3><p>Every three waves, pick one of three random boons. No two battles play the same.</p><div class="bl"><span style="--i:0">⚔️</span><span style="--i:1">💥</span><span style="--i:2">❤️</span></div></article>
-    <article class="f tilt rv" style="--i:1"><h3>12 pets</h3><p>Wolves bite, hawks dive, piglets fetch meat, Lumi saves your life.</p><div class="pets" id="pets"></div></article>
+    <article class="f tilt rv" style="--i:0"><h3>Blessings</h3><p>Every three waves, pick one of three random boons. No two battles play the same.</p><div class="bl" id="bl"><span style="--i:0"><img src="img/pk-fury.webp" alt="" loading="lazy"></span><span style="--i:1"><img src="img/pk-crit.webp" alt="" loading="lazy"></span><span style="--i:2"><img src="img/pk-vamp.webp" alt="" loading="lazy"></span></div></article>
+    <article class="f tilt rv" style="--i:1"><h3>Combo and Frenzy</h3><p>Chain kills to build a combo. Keep it going and FRENZY kicks in: more damage, more speed.</p><div class="cbo" aria-hidden="true"><b id="cbn">COMBO x12</b><i>FRENZY!</i></div></article>
     <article class="f tilt rv" style="--i:2"><h3>Angels and rockets</h3><p>Build an angel shrine and a rocket tower to answer zombie catapults.</p><img class="art" src="img/u-angel.webp" alt="" loading="lazy" style="height:74%"></article>
   </div>
+  <div class="petz rv"><h3>12 pets fight beside you</h3><p>Wolves bite, hawks dive, piglets fetch meat, Lumi saves your life. Every pet has a rare golden form.</p><div class="pz" id="pets"><div class="pc" style="--i:0"><img src="img/pt-wolf.webp" alt="Wolf pup" loading="lazy"><b>Wolf pup</b><span>Bites nearby zombies</span></div><div class="pc" style="--i:1"><img src="img/pt-hawk.webp" alt="Hawk" loading="lazy"><b>Hawk</b><span>Dives from the sky</span></div><div class="pc" style="--i:2"><img src="img/pt-pig.webp" alt="Piglet" loading="lazy"><b>Piglet</b><span>Fetches meat for you</span></div><div class="pc" style="--i:3"><img src="img/pt-fluff.webp" alt="Fluff" loading="lazy"><b>Fluff</b><span>Bites and roars to stun</span></div><div class="pc" style="--i:4"><img src="img/pt-mint.webp" alt="Mint" loading="lazy"><b>Mint</b><span>Heals you over time</span></div><div class="pc" style="--i:5"><img src="img/pt-ember.webp" alt="Ember" loading="lazy"><b>Ember</b><span>Spits fire at groups</span></div><div class="pc" style="--i:6"><img src="img/pt-puff.webp" alt="Puff" loading="lazy"><b>Puff</b><span>Fetches lots of meat</span></div><div class="pc" style="--i:7"><img src="img/pt-nimbus.webp" alt="Nimbus" loading="lazy"><b>Nimbus</b><span>Zaps 3 enemies at once</span></div><div class="pc" style="--i:8"><img src="img/pt-frost.webp" alt="Frost" loading="lazy"><b>Frost</b><span>Bites and freezes</span></div><div class="pc" style="--i:9"><img src="img/pt-chesty.webp" alt="Chesty" loading="lazy"><b>Chesty</b><span>Its meat pays extra</span></div><div class="pc" style="--i:10"><img src="img/pt-shroom.webp" alt="Shroom" loading="lazy"><b>Shroom</b><span>Poison spores hit groups</span></div><div class="pc" style="--i:11"><img src="img/pt-lumi.webp" alt="Lumi" loading="lazy"><b>Lumi</b><span>Saves you at low health</span></div></div></div>
   <div class="nums" id="nums">
     <div class="rv" style="--i:0"><b data-n="22">0</b><span>Heroes</span></div><div class="rv" style="--i:1"><b data-n="63">0</b><span>Levels</span></div><div class="rv" style="--i:2"><b data-n="33">0</b><span>Monsters</span></div><div class="rv" style="--i:3"><b data-n="0" data-t="$0">$0</b><span>To play</span></div>
   </div>
@@ -410,6 +596,7 @@ h2.rv.sp{opacity:1;translate:none;scale:none}
 <div id="twr" aria-hidden="true"><div class="tw"></div><b>MEAT x0</b></div>
 <footer><div class="wrap">© 2026 Meat Hero vs Zombie · A free browser game · <a href="../">Play</a> · <a href="#hero">Back to top</a><br>Sound effects and music: CC0 works from OpenGameArt contributors.</div></footer>
 <div id="stick"><a class="btn play" href="../">Play free now</a></div>
+<div id="prog" aria-hidden="true"></div><canvas id="trail" aria-hidden="true"></canvas><div id="cur" aria-hidden="true"><span></span></div>
 <div id="lb" role="dialog" aria-modal="true" aria-label="Screenshot" tabindex="-1"></div>
 
 <script>
@@ -440,17 +627,28 @@ if (FINE && !RM) $$('.tilt').forEach(c => { c.addEventListener('pointermove', e 
 // ----- trailer
 $('#pl').addEventListener('click', e => { const tv = e.currentTarget.parentElement, v = document.createElement('video'); v.src = 'img/trailer.mp4'; v.controls = true; v.playsInline = true; v.loop = true; v.muted = true; v.poster = 'img/poster.jpg'; v.setAttribute('aria-label', 'Game trailer'); const old = [...tv.childNodes]; v.onerror = () => { tv.innerHTML = ''; tv.append(...old); }; tv.innerHTML = ''; tv.append(v); if (e.isTrusted) v.focus(); v.play().catch(() => { }); });
 // ----- hero selector
-{ const ths = $('#ths'), big = $('#hbig'), stg = $('#stg'); let cur = -1, auto = null, touched = false; const mx = { hp: 155, dmg: 24, spd: 4.5, rng: 8.2, mv: 7.7 };
+{ const ths = $('#ths'), stg = $('#stg'), sec = $('#heroes'); let cur = -1, auto = null, touched = false, var3 = 0; const mx = { hp: 155, dmg: 24, spd: 4.5, rng: 8.2, mv: 7.7 };
+  const ACC = { F: '#ff5a3c', A: '#63c41e', M: '#a866ff', S: '#ff4fa3', G: '#3fa9ff', E: '#ffa51e', T: '#16c7a0' };
   const stop = () => { touched = true; clearInterval(auto); }; ['pointerdown', 'focusin', 'touchstart'].forEach(ev => $('.hsel').addEventListener(ev, stop, { passive: true }));
-  const show = (i, user) => { if (i === cur) return; cur = i; const [id, c, hp, dmg, rate, rng, mv, role] = H[i]; const nm = id[0].toUpperCase() + id.slice(1), url = `img/h-${id}.webp`, sw = () => { if (cur !== i) return; big.classList.remove('sw'); void big.offsetWidth; big.src = url; big.alt = nm + ', ' + CL[c]; big.classList.add('sw'); }; if (big.getAttribute('src') === url) sw(); else { const im = new Image(); im.onload = im.onerror = sw; im.src = url; } stg.style.backgroundImage = `url(img/b-${id}.webp)`; $('#hcls').textContent = CL[c]; $('#hname').textContent = id.toUpperCase(); $('#hrole').textContent = role;
-    const rows = [['Health', hp / mx.hp, hp], ['Damage', dmg / mx.dmg, dmg], ['Speed', (1 / rate) / mx.spd, (1 / rate).toFixed(1)], ['Range', rng / mx.rng, rng], ['Agility', mv / mx.mv, mv]]; const hb = $('#hbars'); if (!hb.children.length) hb.innerHTML = rows.map(r => `<div class="bar"><span>${r[0]}</span><u><i></i></u><b></b></div>`).join(''); [...hb.children].forEach((el, k) => { el.querySelector('i').style.setProperty('--w', Math.round(Math.min(1, rows[k][1]) * 100) + '%'); el.querySelector('b').textContent = rows[k][2]; });
-    [...ths.children].forEach((b, k) => { b.classList.toggle('on', k === i); b.setAttribute('aria-pressed', k === i); }); if (user) stop(); const b = ths.children[i]; if (b && ths.scrollWidth > ths.clientWidth + 4) ths.scrollTo({ left: b.offsetLeft - ths.clientWidth / 2 + b.offsetWidth / 2, behavior: RM ? 'auto' : 'smooth' }); };
+  const load = u => new Promise(r => { const im = new Image(); im.onload = im.onerror = () => r(); im.src = u; });
+  const retx = el => { el.classList.remove('tx'); void el.offsetWidth; el.classList.add('tx'); };
+  const show = (i, user) => { if (i === cur) return; const prev = cur; cur = i; const [id, c, hp, dmg, rate, rng, mv, role] = H[i], nm = id[0].toUpperCase() + id.slice(1), hu = `img/h-${id}.webp`, bu = `img/b-${id}.webp`;
+    [...ths.children].forEach((b, k) => { b.classList.toggle('on', k === i); b.setAttribute('aria-pressed', k === i); }); if (user) stop(); const tb = ths.children[i]; if (tb && ths.scrollWidth > ths.clientWidth + 4) ths.scrollTo({ left: tb.offsetLeft - ths.clientWidth / 2 + tb.offsetWidth / 2, behavior: RM ? 'auto' : 'smooth' });
+    // tải xong cả nền lẫn người rồi mới chuyển, để hai thứ đổi cùng một nhịp
+    Promise.all([load(hu), load(bu)]).then(() => { if (cur !== i) return; const first = prev < 0, fwd = first || i > prev, olds = [...stg.querySelectorAll('.sc')];
+      sec.style.setProperty('--acc', ACC[c]); stg.style.setProperty('--acc', ACC[c]);
+      if (!(first && olds.length && olds[0].querySelector('img').getAttribute('src') === hu)) { const sc = document.createElement('div'); sc.className = 'sc' + (first ? '' : ' in'); sc.style.backgroundImage = `url(${bu})`; const v = var3++ % 3; sc.style.setProperty('--an', v === 2 ? 'wI' : fwd ? 'wR' : 'wL'); sc.style.setProperty('--dx', fwd ? '60%' : '-60%');
+        const im = document.createElement('img'); im.className = 'big'; im.id = 'hbig'; im.src = hu; im.alt = nm + ', ' + CL[c]; sc.append(im); olds.forEach(o => { const oi = o.querySelector('img'); if (oi) oi.removeAttribute('id'); o.classList.remove('in'); o.classList.add('out'); o.style.setProperty('--ox', fwd ? '-50%' : '50%'); }); stg.append(sc);
+        if (!first && !RM && v !== 2) { const w = document.createElement('i'); w.className = 'ws'; w.style.setProperty('--wf', fwd ? '330%' : '-130%'); w.style.setProperty('--wt', fwd ? '-130%' : '330%'); stg.append(w); setTimeout(() => w.remove(), 700); }
+        setTimeout(() => olds.forEach(o => o.remove()), RM ? 0 : 720); }
+      const cls = $('#hcls'), hn = $('#hname'), hr = $('#hrole'); cls.textContent = CL[c]; hn.textContent = id.toUpperCase(); hr.textContent = role; if (!first) { retx(cls); retx(hn); retx(hr); }
+      const rows = [['Health', hp / mx.hp, hp], ['Damage', dmg / mx.dmg, dmg], ['Speed', (1 / rate) / mx.spd, (1 / rate).toFixed(1)], ['Range', rng / mx.rng, rng], ['Agility', mv / mx.mv, mv]]; const hb = $('#hbars'); if (!hb.children.length) hb.innerHTML = rows.map(r => `<div class="bar"><span>${r[0]}</span><u><i></i></u><b></b></div>`).join(''); [...hb.children].forEach((el, k) => { el.querySelector('i').style.setProperty('--w', Math.round(Math.min(1, rows[k][1]) * 100) + '%'); el.querySelector('b').textContent = rows[k][2]; }); }); };
   ths.innerHTML = H.map(h => `<button class="th" style="background-image:url(img/b-${h[0]}.webp)" aria-label="${h[0][0].toUpperCase() + h[0].slice(1)}" aria-pressed="false"><img src="img/t-${h[0]}.webp" alt="" loading="lazy"></button>`).join(''); [...ths.children].forEach((b, i) => b.addEventListener('click', () => show(i, 1))); show(0);
-  if (!RM && 'IntersectionObserver' in window) new IntersectionObserver(es => { clearInterval(auto); if (es[0].isIntersecting && !touched) auto = setInterval(() => show((cur + 1) % H.length), 2600); }, { threshold: .3 }).observe(stg); }
+  if (!RM && 'IntersectionObserver' in window) new IntersectionObserver(es => { clearInterval(auto); if (es[0].isIntersecting && !touched) auto = setInterval(() => show((cur + 1) % H.length), 3400); }, { threshold: .3 }).observe(stg); }
 // ----- bosses, pets, gallery
 $('#bosses').innerHTML = BOSS.map((b, i) => `<article class="boss"><span class="cap">Captured!</span><img src="img/m-${b[0]}.webp" alt="${b[1]}" loading="lazy"><h3>${b[1]}</h3><p>${b[3]}</p><small>${b[2]}</small></article>`).join('');
 { const row = $('#bosses'); $$('#rnav button').forEach((b, k) => b.addEventListener('click', () => row.scrollBy({ left: (k ? 1 : -1) * row.clientWidth * .7, behavior: RM ? 'auto' : 'smooth' }))); }
-$('#pets').innerHTML = PETS.map((p, i) => `<img src="img/m-pet${p}S1.webp" alt="" loading="lazy" style="--i:${i}">`).join('');
+
 $('#gal').innerHTML = [0, 1, 2, 3, 4, 5].map(i => `<button class="rv" style="--i:${i % 3}" aria-label="Open screenshot ${i + 1}"><img src="img/s${i}.webp" alt="Gameplay screenshot ${i + 1}" loading="lazy" width="1280" height="720"></button>`).join('');
 $$('#gal .rv').forEach(reveal);
 { const lb = $('#lb'); let from = null; const shut = () => { if (!lb.classList.contains('on')) return; lb.classList.remove('on'); document.documentElement.style.overflow = ''; if (from) from.focus(); }; $('#gal').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; from = b; lb.innerHTML = '<button class="x" type="button" aria-label="Close">&#10005;</button>'; const li = new Image(); li.alt = 'Gameplay screenshot'; li.src = b.querySelector('img').src; lb.append(li); lb.classList.add('on'); document.documentElement.style.overflow = 'hidden'; lb.querySelector('.x').focus(); }); lb.addEventListener('click', shut); addEventListener('keydown', e => { if (e.key === 'Escape') shut(); }); }
@@ -495,6 +693,81 @@ if (!FINE && 'IntersectionObserver' in window) { const row = $('#bosses'); new I
   const ask = () => { if (!tick) tick = requestAnimationFrame(run); }; addEventListener('scroll', ask, { passive: true }); addEventListener('resize', ask); run(); }
 // ----- trailer tự chạy khi cuộn tới (không chạy khi máy bật tiết kiệm dữ liệu)
 { const pl = $('#pl'), cn = navigator.connection; if (pl && !RM && 'IntersectionObserver' in window && !(cn && (cn.saveData || /2g|3g/.test(cn.effectiveType || '')))) new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { o.disconnect(); if (document.body.contains(pl)) pl.click(); } }, { threshold: .6 }).observe(pl.parentElement); }
+})();
+</script>
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)], RM = matchMedia('(prefers-reduced-motion: reduce)').matches, FINE = matchMedia('(hover: hover) and (pointer: fine)').matches, root = document.documentElement;
+const hero = $('#hero'); if (!hero) return;
+// ----- thanh tiến độ cuộn + dải chữ chạy nhanh theo tốc độ cuộn
+{ const pr = $('#prog'), mq = $('#mq'); let t = 0, ly = scrollY, back = 0; const an = () => (mq.getAnimations ? mq.getAnimations()[0] : null);
+  const run = () => { t = 0; const max = root.scrollHeight - innerHeight; pr.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, scrollY / max) : 0) + ')'; const dy = Math.abs(scrollY - ly); ly = scrollY; const a = an(); if (a && !RM) { a.playbackRate = 1 + Math.min(7, dy * .12); clearTimeout(back); back = setTimeout(() => { a.playbackRate = 1; }, 180); } };
+  addEventListener('scroll', () => { if (!t) t = requestAnimationFrame(run); }, { passive: true }); run();
+  if (FINE) { const box = mq.parentElement; box.style.pointerEvents = 'auto'; box.addEventListener('pointerenter', () => { const a = an(); if (a) a.playbackRate = .18; }); box.addEventListener('pointerleave', () => { const a = an(); if (a) a.playbackRate = 1; }); } }
+// ----- tia lửa theo chuột, bấm hay chạm là nổ tia
+const cv = $('#trail'), cx = cv.getContext('2d'), cur = $('#cur'), cl = cur.querySelector('span'); let P = [], RG = [], W = 0, Hh = 0, Dp = 1, raf = 0, lt = 0, mx = -100, my = -100, rx = -100, ry = -100, seen = false, px = -1, py = -1, acc = 0;
+const size = () => { Dp = Math.min(devicePixelRatio || 1, 1.5); W = innerWidth; Hh = innerHeight; cv.width = W * Dp; cv.height = Hh * Dp; }; size(); addEventListener('resize', size);
+const COL = ['#ffd34d', '#fff3d6', '#ff8a1e', '#c8ff5a'];
+const kick = () => { if (!raf) { lt = performance.now(); raf = requestAnimationFrame(loop); } };
+const spark = (x, y, pow) => { if (P.length > 150) return; const a = Math.random() * 6.283, v = (18 + Math.random() * 62) * pow; P.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 22 * pow, l: 0, m: .4 + Math.random() * .5, s: 1.6 + Math.random() * 2.6 * Math.min(pow + .4, 1.7), c: COL[Math.random() * 4 | 0], r: Math.random() * 6.28 }); };
+const loop = t => { raf = 0; const dt = Math.min(.05, (t - lt) / 1000); lt = t; cx.setTransform(Dp, 0, 0, Dp, 0, 0); cx.clearRect(0, 0, W, Hh);
+  P = P.filter(p => (p.l += dt) < p.m); for (const p of P) { p.vy += 170 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.r += dt * 7; const k = 1 - p.l / p.m, s = p.s * (.4 + k * .6); cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.globalAlpha = k; cx.fillStyle = p.c; cx.beginPath(); for (let i = 0; i < 8; i++) { const rr = i % 2 ? s * .42 : s * 1.9, an = i * Math.PI / 4; cx.lineTo(Math.cos(an) * rr, Math.sin(an) * rr); } cx.closePath(); cx.fill(); cx.restore(); }
+  RG = RG.filter(g => (g.l += dt) < .45); for (const g of RG) { const k = g.l / .45; cx.globalAlpha = 1 - k; cx.strokeStyle = '#ffe27a'; cx.lineWidth = 5 * (1 - k) + 1; cx.beginPath(); cx.arc(g.x, g.y, 8 + k * 78, 0, 6.283); cx.stroke(); } cx.globalAlpha = 1;
+  let moving = false; if (FINE && seen) { rx += (mx - rx) * .2; ry += (my - ry) * .2; cur.style.transform = `translate3d(${rx.toFixed(1)}px,${ry.toFixed(1)}px,0)`; moving = Math.abs(mx - rx) + Math.abs(my - ry) > .3; }
+  if (P.length || RG.length || moving) kick(); };
+// ----- nhãn của vòng sáng theo thứ đang rê vào
+const label = el => !el || !el.closest ? null : el.closest('.zh') ? 'CHOP' : el.closest('#gal button') ? 'ZOOM' : el.closest('.th') ? 'PICK' : el.closest('.boss') ? 'CATCH' : el.closest('#pl') ? 'PLAY' : el.closest('a.play') ? 'PLAY' : el.closest('.hk,.hb') ? 'HI!' : el.closest('.pc') ? 'PET' : el.closest('a,button,.bl span') ? '' : null;
+let sec = null, hands = $$('.zh'), h1 = $('.h1'), say = $('#say'), sayT = 0;
+const lean = on => { for (const z of hands) { if (!on) { z.style.rotate = ''; continue; } const r = z.getBoundingClientRect(), c = r.left + r.width / 2; z.style.rotate = Math.max(-13, Math.min(13, (mx - c) / innerWidth * 46)).toFixed(1) + 'deg'; } };
+addEventListener('pointermove', e => { mx = e.clientX; my = e.clientY; const mouse = e.pointerType === 'mouse';
+  if (mouse && FINE) { if (!seen) { seen = true; rx = mx; ry = my; cur.classList.add('on'); } if (!RM) { if (px >= 0) { acc += Math.hypot(mx - px, my - py); let n = 0; while (acc > 18 && n++ < 4) { acc -= 18; spark(mx + (Math.random() - .5) * 10, my + (Math.random() - .5) * 10, .45); } } px = mx; py = my; } kick(); }
+  const s = e.target && e.target.closest ? e.target.closest('section') : null; if (s !== sec) { if (sec === hero) { h1.style.transform = ''; lean(false); } sec = s; }
+  if (s) { const r = s.getBoundingClientRect(); s.style.setProperty('--sx', (mx - r.left).toFixed(0) + 'px'); s.style.setProperty('--sy', (my - r.top).toFixed(0) + 'px');
+    if (s === hero && mouse && !RM) { const nx = mx / innerWidth - .5, ny = (my - r.top) / r.height - .5; h1.style.transform = `perspective(900px) rotateY(${(nx * 16).toFixed(1)}deg) rotateX(${(-ny * 12).toFixed(1)}deg)`; lean(true); } }
+}, { passive: true });
+if (FINE) { document.addEventListener('pointerover', e => { const l = label(e.target); cur.classList.toggle('act', l !== null); cur.classList.toggle('lb', !!l); if (l) cl.textContent = l; }, { passive: true });
+  root.addEventListener('mouseleave', () => cur.classList.remove('on')); root.addEventListener('mouseenter', () => { if (seen) cur.classList.add('on'); });
+  addEventListener('pointerup', () => cur.classList.remove('dn'), { passive: true }); }
+addEventListener('pointerdown', e => { if (FINE) cur.classList.add('dn'); if (RM) return; for (let i = 0; i < 14; i++) spark(e.clientX, e.clientY, 1.7); RG.push({ x: e.clientX, y: e.clientY, l: 0 }); kick(); }, { passive: true });
+// ----- hai tướng nói khi rê vào hoặc chạm
+{ const L = { hk: ['Fresh meat!', 'Chop chop!', 'Stack it higher!', 'Zombies? Lunch.'], hb: ['Hold the gate!', 'For the fortress!', 'Shields up!', 'None shall pass!'] }; let k = 0;
+  const talk = el => { const key = el.classList.contains('hk') ? 'hk' : 'hb', r = el.getBoundingClientRect(), hr = hero.getBoundingClientRect(); say.textContent = L[key][k++ % 4]; say.style.left = Math.max(110, Math.min(hr.width - 110, r.left + r.width * (key === 'hk' ? .52 : .46) - hr.left)) + 'px'; say.style.top = Math.max(70, r.top - hr.top + r.height * .04) + 'px'; say.classList.add('on'); clearTimeout(sayT); sayT = setTimeout(() => say.classList.remove('on'), 1900); };
+  $$('.hk,.hb').forEach(el => { el.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') talk(el); }); el.addEventListener('pointerdown', () => talk(el)); el.addEventListener('pointerleave', () => { clearTimeout(sayT); sayT = setTimeout(() => say.classList.remove('on'), 350); }); }); }
+// ----- nút hút theo chuột
+if (FINE && !RM) $$('.btn.big,#nav .btn,.rnav button,.hinfo .btn').forEach(b => { b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); b.style.translate = `${((e.clientX - r.left - r.width / 2) * .22).toFixed(1)}px ${((e.clientY - r.top - r.height / 2) * .32).toFixed(1)}px`; }, { passive: true }); b.addEventListener('pointerleave', () => { b.style.translate = ''; }); });
+// ----- rê vào thẻ thì mọi chuyển động bên trong chạy nhanh hơn
+if (FINE && !RM) $$('.f,.st').forEach(c => { const set = v => { if (c.getAnimations) c.getAnimations({ subtree: true }).forEach(a => { if (a.effect && a.effect.getTiming().iterations === Infinity) a.playbackRate = v; }); }; c.addEventListener('pointerenter', () => set(3)); c.addEventListener('pointerleave', () => set(1)); });
+// ----- khung trailer và thẻ trùm nghiêng theo chuột
+if (FINE && !RM) { const tilt = (c, deg) => { c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.transform = `perspective(1100px) rotateY(${(x * deg).toFixed(1)}deg) rotateX(${(-y * deg).toFixed(1)}deg)`; }, { passive: true }); c.addEventListener('pointerleave', () => { c.style.transform = ''; }); }; const tv = $('.tv'); if (tv) tilt(tv, 5); $$('#bosses .boss').forEach(c => { c.style.transition = 'border-color .25s,translate .25s,transform .18s ease-out'; tilt(c, 12); }); }
+// ----- sân khấu chọn tướng: hình trượt ngược chuột; dải tướng phóng to kiểu dock
+if (FINE && !RM) { const stg = $('#stg'), ths = $('#ths'); stg.addEventListener('pointermove', e => { const r = stg.getBoundingClientRect(); stg.style.setProperty('--px', ((e.clientX - r.left) / r.width - .5).toFixed(3)); stg.style.setProperty('--py', ((e.clientY - r.top) / r.height - .5).toFixed(3)); }, { passive: true }); stg.addEventListener('pointerleave', () => { stg.style.setProperty('--px', 0); stg.style.setProperty('--py', 0); });
+  let tk = 0, ex = 0, ey = 0; const dock = () => { tk = 0; for (const b of ths.children) { const r = b.getBoundingClientRect(), d = Math.hypot(ex - (r.left + r.width / 2), ey - (r.top + r.height / 2)), k = Math.max(0, 1 - d / 170), sc = 1 + .42 * k * k; b.style.scale = sc.toFixed(3); b.style.zIndex = sc > 1.04 ? 3 : ''; } };
+  ths.addEventListener('pointermove', e => { ex = e.clientX; ey = e.clientY; if (!tk) tk = requestAnimationFrame(dock); }, { passive: true }); ths.addEventListener('pointerleave', () => { for (const b of ths.children) { b.style.scale = ''; b.style.zIndex = ''; } }); }
+// ----- thẻ Blessings lần lượt lật sang phước lành khác
+{ const bl = $('#bl'), K = ['fury', 'crit', 'vamp', 'swift', 'tower', 'butcher', 'mend', 'rich']; let n = 3, c = 0; K.forEach(k => { const i = new Image(); i.src = 'img/pk-' + k + '.webp'; }); if (bl && !RM) setInterval(() => { if (document.hidden) return; const card = bl.children[c++ % 3], im = card.querySelector('img'), k = K[n++ % K.length]; card.classList.remove('fl'); void card.offsetWidth; card.classList.add('fl'); setTimeout(() => { im.src = 'img/pk-' + k + '.webp'; }, 250); }, 1700); }
+// ----- rê vào ô số thì đếm lại
+if (!RM) $$('#nums>div').forEach(d => { const b = d.querySelector('b'); if (!b || b.dataset.t) return; let busy = false; d.addEventListener('pointerenter', () => { if (busy) return; busy = true; const n = +b.dataset.n, t0 = performance.now(); const f = t => { const k = Math.min(1, (t - t0) / 650); b.textContent = Math.round(n * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); else busy = false; }; requestAnimationFrame(f); }); });
+// ----- ảnh chụp: phóng to tại chỗ con trỏ
+if (FINE) $('#gal').addEventListener('pointermove', e => { const b = e.target.closest('button'); if (!b) return; const r = b.getBoundingClientRect(), im = b.querySelector('img'); im.style.transformOrigin = `${((e.clientX - r.left) / r.width * 100).toFixed(0)}% ${((e.clientY - r.top) / r.height * 100).toFixed(0)}%`; }, { passive: true });
+// ----- chữ tiêu đề: sau khi nảy xong thì cho phép nảy từng chữ khi rê qua
+if (!RM) { const arm = h => { if (h.classList.contains('go')) setTimeout(() => h.classList.add('dn'), h.querySelectorAll('.ch').length * 26 + 700); }; $$('h2.sp').forEach(h => { if (h.classList.contains('go')) arm(h); else new MutationObserver((m, o) => { if (h.classList.contains('go')) { o.disconnect(); arm(h); } }).observe(h, { attributes: true, attributeFilter: ['class'] }); }); }
+})();
+</script>
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)], RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// ----- cảnh chơi thật ở How it plays: chỉ chạy khi đang nằm trong khung nhìn
+{ const vs = $$('.hv'), cn = navigator.connection, lite = RM || (cn && (cn.saveData || /2g|3g/.test(cn.effectiveType || '')));
+  if (!lite && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { const v = e.target; if (e.isIntersecting) { const q = v.play(); if (q && q.catch) q.catch(() => { }); } else v.pause(); }), { threshold: .35 }); vs.forEach(v => io.observe(v)); }
+  else vs.forEach(v => { v.controls = true; }); }
+// ----- hào quang thật: lần lượt qua 6 bậc
+{ const t = $('#tier'); if (t) { const im = t.querySelector('img'), lb = t.querySelector('b'), dots = [...t.querySelectorAll('.tdots i')], T = [['ROOKIE', '#ffffff'], ['BRONZE', '#ffd34d'], ['SILVER', '#5fd0ff'], ['GOLD', '#c58bff'], ['LEGEND', '#ff7a3c'], ['MYTHIC', '#ff4fd8']]; let k = 0; T.forEach((_, i) => { const p = new Image(); p.src = 'img/hq-' + i + '.webp'; });
+    const set = i => { k = i; im.src = 'img/hq-' + i + '.webp'; lb.textContent = T[i][0]; t.style.setProperty('--tc', T[i][1]); dots.forEach((d, j) => d.classList.toggle('on', j <= i)); t.classList.remove('pp'); void t.offsetWidth; t.classList.add('pp'); };
+    set(0); if (!RM) setInterval(() => { if (!document.hidden) set((k + 1) % 6); }, 1500); else set(5); } }
+// ----- thẻ combo: số nhảy liên tục, đủ 20 thì FRENZY
+{ const b = $('#cbn'); if (b && !RM) { const box = b.parentElement; let n = 1; setInterval(() => { if (document.hidden) return; n = n >= 36 ? 1 : n + 1; b.textContent = 'COMBO x' + n; b.classList.remove('pp'); void b.offsetWidth; b.classList.add('pp'); box.classList.toggle('fr', n >= 20); }, 260); } }
 })();
 </script>
 </body>
