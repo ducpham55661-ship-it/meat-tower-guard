@@ -538,6 +538,35 @@ section{isolation:isolate}
 @keyframes fxpc{0%{scale:0;rotate:-30deg;opacity:0}30%{scale:1.15;rotate:6deg;opacity:1}75%{scale:1;rotate:0deg;opacity:1}100%{scale:1.3;opacity:0}}
 .pfx.pic.stay{animation:fxpk .6s both cubic-bezier(.2,1.7,.4,1)}
 @keyframes fxpk{0%{scale:0;translate:0 40%}100%{scale:1;translate:0 0}}
+
+/* dot 10: dien hoat bang khung hinh that, bo vong tron chuot */
+#cur{display:none!important}
+.sc[class*="pf-"] .big{animation:idle 3.6s ease-in-out infinite}
+.pfx{display:none}.pfx.pic.stay{display:block}
+@keyframes prd{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.boss .bsp{position:absolute;left:50%;top:-58px;height:206px;margin:0 0 0 0;translate:-50% 0;animation-duration:.72s;filter:drop-shadow(0 14px 10px #000b);transition:scale .25s cubic-bezier(.2,1.7,.4,1),filter .25s}
+.boss:hover .bsp{animation-duration:.34s;scale:1.1}
+.boss.cp .bsp{filter:drop-shadow(0 14px 10px #000b) drop-shadow(0 0 18px #ffd34d)}
+.hrd{overflow:hidden;margin-top:6px;padding-top:8px;-webkit-mask:linear-gradient(90deg,#0000,#000 8%,#000 92%,#0000);mask:linear-gradient(90deg,#0000,#000 8%,#000 92%,#0000)}
+.hrd>div{display:flex;align-items:flex-end;gap:46px;width:max-content;animation:prd 38s linear infinite}
+.hrd .pr{height:var(--h);margin:0;flex:none;animation-duration:.62s}
+#foes:hover .hrd>div{animation-duration:16s}
+@media(max-width:620px){.hrd .pr{height:calc(var(--h)*.72)}.hrd>div{gap:30px}}
+.arena{position:relative;height:150px;margin-top:16px;border-radius:18px;overflow:hidden;border:3px solid var(--acc,#ffd34d);background:linear-gradient(#0b0e2855,#0b0e2800 60%),var(--bgi,none) center 78%/cover,#1b2a66;box-shadow:0 6px 0 #05071a,inset 0 -26px 30px #0007;transition:border-color .5s}
+.atag{position:absolute;left:10px;top:8px;z-index:3;font:900 11px/1 Nunito,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:#0009;padding:5px 9px;border-radius:99px}
+.atag::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff4b4b;margin-right:6px;animation:frz .6s ease-in-out infinite alternate}
+.ah,.az{position:absolute;bottom:8px;background-repeat:no-repeat;background-position:0 0;filter:drop-shadow(0 6px 4px #0009);will-change:background-position}
+.ah{left:20%;height:132px;translate:-50% 0;z-index:2}
+.az{left:var(--x,110%);translate:-50% 0;z-index:1;transition:left .08s linear}
+.az.hit{animation:azh .38s ease-out forwards}
+@keyframes azh{0%{filter:brightness(4)}40%{filter:brightness(2.5);rotate:14deg;translate:-40% -14%}100%{filter:brightness(1);rotate:38deg;translate:-20% 20%;opacity:0;scale:.6}}
+.arena .am{position:absolute;bottom:26px;width:34px;margin-left:-17px;z-index:3;pointer-events:none;animation:am .8s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes am{0%{translate:0 0;scale:.4;opacity:1}40%{translate:var(--dx) -70px;scale:1.1;opacity:1}100%{translate:calc(var(--dx)*1.6) -8px;scale:.9;opacity:0}}
+.arena .ax{position:absolute;bottom:44px;height:7px;width:22%;border-radius:7px;z-index:2;background:linear-gradient(90deg,#fff0,#fff 55%,var(--acc,#ffd34d));filter:drop-shadow(0 0 6px var(--acc,#ffd34d));animation:ax .2s linear forwards}
+@keyframes ax{from{left:24%;opacity:1}to{left:var(--tx);opacity:.9}}
+.arena .ak{position:absolute;bottom:14px;width:110px;height:110px;margin-left:-55px;border-radius:50%;z-index:2;background:conic-gradient(from 210deg,#fff0 0,#fff 14%,var(--acc,#ffd34d) 26%,#fff0 40%);-webkit-mask:radial-gradient(circle,#0000 50%,#000 53%,#000 68%,#0000 72%);mask:radial-gradient(circle,#0000 50%,#000 53%,#000 68%,#0000 72%);animation:fxsl .3s ease-out both}
+@media(max-width:900px){.arena{max-width:520px;margin-inline:auto}}
+@media(max-height:520px) and (orientation:landscape){.arena{height:120px}.ah{height:104px}}
 </style>
 <noscript><style>.rv.rv{opacity:1;translate:none;scale:none}</style></noscript>
 </head>
@@ -599,7 +628,8 @@ section{isolation:isolate}
   <div class="hsel rv">
     <div class="stage" id="stg"><span class="cls" id="hcls"></span><div class="sc" style="background-image:url(img/b-kira.webp)"><img class="big" id="hbig" alt="Kira, Fighter" src="img/h-kira.webp"></div></div>
     <div class="hinfo"><h3 id="hname"></h3><p class="role" id="hrole"></p><div id="hbars"></div>
-      <p style="margin-top:22px"><a class="btn play" href="../">Play this hero</a></p></div>
+      <div class="arena" id="arena" aria-hidden="true"><span class="atag">In game</span><i class="az"></i><i class="ah"></i></div>
+      <p style="margin-top:18px"><a class="btn play" href="../">Play this hero</a></p></div>
   </div>
   <div class="thumbs" id="ths"></div>
 </div></section>
@@ -609,6 +639,7 @@ section{isolation:isolate}
   <h2 class="rv">Beat them. <b>Then own them.</b></h2>
   <p class="lead rv">Every chapter ends at a boss gate. Earn the stars and the power to enter, win the fight, and the boss you just beat becomes the guard of your keep.</p></div>
   <div class="row" id="bosses" tabindex="0" role="region" aria-label="Bosses"></div>
+  <div class="hrd" aria-hidden="true"><div><i class="pr" style="--s:url(img/ms-grub.webp);--ar:86/129;--h:80px;--i:0"></i><i class="pr" style="--s:url(img/ms-horn.webp);--ar:133/176;--h:109px;--i:1"></i><i class="pr" style="--s:url(img/ms-dash.webp);--ar:125/136;--h:84px;--i:2"></i><i class="pr" style="--s:url(img/ms-eshd.webp);--ar:186/176;--h:109px;--i:3"></i><i class="pr" style="--s:url(img/ms-ebom.webp);--ar:116/136;--h:84px;--i:4"></i><i class="pr" style="--s:url(img/ms-ehel.webp);--ar:129/156;--h:97px;--i:5"></i><i class="pr" style="--s:url(img/ms-espit.webp);--ar:130/156;--h:97px;--i:6"></i><i class="pr" style="--s:url(img/ms-e2a.webp);--ar:106/142;--h:88px;--i:7"></i><i class="pr" style="--s:url(img/ms-e3a.webp);--ar:115/142;--h:88px;--i:8"></i><i class="pr" style="--s:url(img/ms-e4a.webp);--ar:119/122;--h:76px;--i:9"></i><i class="pr" style="--s:url(img/ms-e5a.webp);--ar:112/136;--h:84px;--i:10"></i><i class="pr" style="--s:url(img/ms-e6a.webp);--ar:105/136;--h:84px;--i:11"></i><i class="pr" style="--s:url(img/ms-e7a.webp);--ar:102/129;--h:80px;--i:12"></i><i class="pr" style="--s:url(img/ms-e3b.webp);--ar:129/136;--h:84px;--i:13"></i><i class="pr" style="--s:url(img/ms-e5b.webp);--ar:130/142;--h:88px;--i:14"></i><i class="pr" style="--s:url(img/ms-e7b.webp);--ar:157/136;--h:84px;--i:15"></i><i class="pr" style="--s:url(img/ms-grub.webp);--ar:86/129;--h:80px;--i:16"></i><i class="pr" style="--s:url(img/ms-horn.webp);--ar:133/176;--h:109px;--i:17"></i><i class="pr" style="--s:url(img/ms-dash.webp);--ar:125/136;--h:84px;--i:18"></i><i class="pr" style="--s:url(img/ms-eshd.webp);--ar:186/176;--h:109px;--i:19"></i><i class="pr" style="--s:url(img/ms-ebom.webp);--ar:116/136;--h:84px;--i:20"></i><i class="pr" style="--s:url(img/ms-ehel.webp);--ar:129/156;--h:97px;--i:21"></i><i class="pr" style="--s:url(img/ms-espit.webp);--ar:130/156;--h:97px;--i:22"></i><i class="pr" style="--s:url(img/ms-e2a.webp);--ar:106/142;--h:88px;--i:23"></i><i class="pr" style="--s:url(img/ms-e3a.webp);--ar:115/142;--h:88px;--i:24"></i><i class="pr" style="--s:url(img/ms-e4a.webp);--ar:119/122;--h:76px;--i:25"></i><i class="pr" style="--s:url(img/ms-e5a.webp);--ar:112/136;--h:84px;--i:26"></i><i class="pr" style="--s:url(img/ms-e6a.webp);--ar:105/136;--h:84px;--i:27"></i><i class="pr" style="--s:url(img/ms-e7a.webp);--ar:102/129;--h:80px;--i:28"></i><i class="pr" style="--s:url(img/ms-e3b.webp);--ar:129/136;--h:84px;--i:29"></i><i class="pr" style="--s:url(img/ms-e5b.webp);--ar:130/142;--h:88px;--i:30"></i><i class="pr" style="--s:url(img/ms-e7b.webp);--ar:157/136;--h:84px;--i:31"></i></div></div>
   <div class="rnav" id="rnav"><button type="button" aria-label="Previous bosses">&#8249;</button><button type="button" aria-label="Next bosses">&#8250;</button></div>
 </section>
 
@@ -655,6 +686,7 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 const CL = { F: 'Fighter', A: 'Archer', M: 'Mage', S: 'Assassin', G: 'Guardian', E: 'Engineer', T: 'Tamer' };
 const H = [['kira', 'F', 60, 6, .4, 2.4, 6.4, 'Axe fighter with a wide swing'], ['boran', 'F', 110, 10, .48, 2.8, 6.1, 'Knight with sword and shield, tough'], ['wren', 'A', 50, 9.5, .36, 6.8, 7.1, 'Archer with fast single shots'], ['arlo', 'A', 62, 15, .5, 7.2, 6.6, 'Archer with heavy shots'], ['lyra', 'M', 48, 11, .5, 6, 6.7, 'Lightning that jumps to five foes'], ['orin', 'M', 56, 13, .8, 6, 6.1, 'Arcane blasts that chain'], ['nyx', 'S', 48, 5, .27, 2.2, 7.5, 'Fast blades and critical hits'], ['kael', 'S', 55, 5.5, .3, 2.2, 7.3, 'Deadly twin daggers'], ['freya', 'G', 130, 8, .55, 2.6, 5.9, 'Shield maiden who draws zombies in'], ['brom', 'G', 155, 9.5, .62, 2.7, 5.6, 'Unbreakable dwarf guardian'], ['pip', 'E', 45, 12, .85, 6, 6.6, 'Bombs that hit whole groups'], ['gizmo', 'E', 52, 14, .95, 6, 6.3, 'Bigger bombs, bigger booms'], ['sylva', 'T', 60, 6, .42, 2.5, 6.8, 'Fights beside her wolf'], ['thorn', 'T', 82, 8, .5, 2.6, 6.3, 'A beast always at his side'], ['tao', 'F', 85, 6.5, .34, 2.8, 6.9, 'Monk with fast staff combos'], ['akira', 'S', 62, 7, .36, 2.5, 7, 'Samurai with huge crits'], ['mei', 'S', 46, 4.5, .22, 2.3, 7.7, 'Fan dancer with the fastest blades'], ['jax', 'A', 58, 7, .26, 6.6, 6.6, 'Gunslinger with rapid fire'], ['ruby', 'A', 52, 24, .85, 8.2, 6.4, 'Musketeer, long range, heavy hit'], ['ignis', 'M', 54, 14, .85, 6, 6.2, 'Fire mage with big blasts'], ['isolde', 'M', 50, 9, .55, 6, 6.5, 'Frost mage who chains and slows'], ['seraphine', 'M', 60, 10, .6, 6, 6.3, 'Priestess of holy light']];
 const BOSS = [['bossF1', 'Butcher Boss', 'Autumn Plains', 'Summons a pack of shamblers'], ['e2dF1', 'King of the Pass', 'Frost Pass', 'An icy giant with a crystal club'], ['e3dF1', 'Pharaoh of Meat', 'Scorched Sands', 'Ancient, hungry and very rich'], ['e4dF1', 'The Meat King', 'Blighted Marsh', 'Ruler of the rotten swamp'], ['e5dF1', 'Guardian Lion', 'Jade Valley', 'A stone lion that came to life'], ['e6dF1', 'Winter Beast', 'Winter Festival', 'It ate all the presents'], ['e7dF1', 'The Nian', 'Lunar New Year', 'Scared of firecrackers, not of you']];
+const BSA = {"boss": "213/285", "e2d": "257/299", "e3d": "294/299", "e4d": "277/299", "e5d": "258/299", "e6d": "274/299", "e7d": "267/299"};
 const PETS = ['wolf', 'hawk', 'pig', 'fluff', 'mint', 'ember', 'puff', 'nimbus', 'frost', 'chesty', 'shroom', 'lumi'];
 // ----- marquee
 { const t = ['22 heroes', 'Boss gates', '12 pets', 'Rare golden heroes', 'Combo and frenzy', '63 levels', 'Endless mode', 'No download'].map(x => `<span>${x.toUpperCase()}</span><i>✦</i>`).join(''); $('#mq').innerHTML = t + t + t + t; }
@@ -697,7 +729,7 @@ $('#pl').addEventListener('click', e => { const tv = e.currentTarget.parentEleme
   ths.innerHTML = H.map(h => `<button class="th" style="background-image:url(img/b-${h[0]}.webp)" aria-label="${h[0][0].toUpperCase() + h[0].slice(1)}" aria-pressed="false"><img src="img/t-${h[0]}.webp" alt="" loading="lazy"></button>`).join(''); [...ths.children].forEach((b, i) => b.addEventListener('click', () => show(i, 1))); show(0);
   if (!RM && 'IntersectionObserver' in window) new IntersectionObserver(es => { clearInterval(auto); if (es[0].isIntersecting && !touched) auto = setInterval(() => show((cur + 1) % H.length), 3400); }, { threshold: .3 }).observe(stg); }
 // ----- bosses, pets, gallery
-$('#bosses').innerHTML = BOSS.map((b, i) => `<article class="boss"><span class="cap">Captured!</span><img src="img/m-${b[0]}.webp" alt="${b[1]}" loading="lazy"><h3>${b[1]}</h3><p>${b[3]}</p><small>${b[2]}</small></article>`).join('');
+$('#bosses').innerHTML = BOSS.map((b, i) => `<article class="boss"><span class="cap">Captured!</span><i class="pr bsp" role="img" aria-label="${b[1]}" style="--s:url(img/mb-${b[0].slice(0, -2)}.webp);--ar:${BSA[b[0].slice(0, -2)]};--i:${i * 2}"></i><h3>${b[1]}</h3><p>${b[3]}</p><small>${b[2]}</small></article>`).join('');
 { const row = $('#bosses'); $$('#rnav button').forEach((b, k) => b.addEventListener('click', () => row.scrollBy({ left: (k ? 1 : -1) * row.clientWidth * .7, behavior: RM ? 'auto' : 'smooth' }))); }
 
 $('#gal').innerHTML = [0, 1, 2, 3, 4, 5].map(i => `<button class="rv" style="--i:${i % 3}" aria-label="Open screenshot ${i + 1}"><img src="img/s${i}.webp" alt="Gameplay screenshot ${i + 1}" loading="lazy" width="1280" height="720"></button>`).join('');
@@ -827,6 +859,29 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // ----- hai tướng đầu trang nhảy một cái khi rê vào hoặc chạm
 if (!RM) document.querySelectorAll('.hk,.hb').forEach(el => { const go = () => { if (el.classList.contains('jp')) return; el.classList.add('jp'); setTimeout(() => el.classList.remove('jp'), 680); }; el.addEventListener('pointerenter', go); el.addEventListener('pointerdown', go); });
+})();
+</script>
+<script>
+(() => {
+'use strict';
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches, $ = s => document.querySelector(s);
+const HS = {"kira":[228,285,8],"boran":[338,272,8],"wren":[197,272,9],"arlo":[227,272,9],"lyra":[303,272,9],"orin":[367,272,9],"nyx":[264,272,9],"kael":[343,272,9],"freya":[444,272,9],"brom":[262,272,9],"pip":[298,272,9],"gizmo":[272,272,9],"sylva":[400,272,9],"thorn":[271,272,9],"tao":[413,272,9],"akira":[317,272,9],"mei":[259,272,9],"jax":[278,272,9],"ruby":[328,272,9],"ignis":[289,272,9],"isolde":[316,272,9],"seraphine":[365,272,9]}, MS = {"grub":[86,129],"horn":[133,176],"dash":[125,136],"eshd":[186,176],"ebom":[116,136],"ehel":[129,156],"espit":[130,156],"e2a":[106,142],"e3a":[115,142],"e4a":[119,122],"e5a":[112,136],"e6a":[105,136],"e7a":[102,129],"e3b":[129,136],"e5b":[130,142],"e7b":[157,136]}, RANGED = { A: 1, M: 1, E: 1 };
+const ar = $('#arena'); if (!ar) return; const ah = ar.querySelector('.ah'), az = ar.querySelector('.az'), hn = $('#hname'), hc = $('#hcls');
+const CLS = { Fighter: 'F', Archer: 'A', Mage: 'M', Assassin: 'S', Guardian: 'G', Engineer: 'E', Tamer: 'T' };
+let id = '', cls = 'F', hf = 0, zx = 112, zk = '', zf = 0, state = 'run', t = 0, wait = 0, vis = false, timer = 0;
+const frame = (el, f, n) => { el.style.backgroundPosition = (n > 1 ? f / (n - 1) * 100 : 0) + '% 0'; };
+const setHero = () => { const nid = (hn.textContent || 'kira').toLowerCase(); if (!HS[nid] || nid === id) return; id = nid; cls = CLS[hc.textContent] || 'F'; const [w, h, n] = HS[id]; ah.style.backgroundImage = `url(img/hs-${id}.webp)`; ah.style.backgroundSize = (n * 100) + '% 100%'; ah.style.aspectRatio = w + '/' + h; ar.style.setProperty('--bgi', `url(img/b-${id}.webp)`); state = 'run'; hf = 0; spawn(); };
+const spawn = () => { const ks = Object.keys(MS); zk = ks[Math.random() * ks.length | 0]; const [w, h] = MS[zk]; az.className = 'az'; az.style.backgroundImage = `url(img/ms-${zk}.webp)`; az.style.backgroundSize = '400% 100%'; az.style.aspectRatio = w + '/' + h; az.style.height = Math.round(h * .5) + 'px'; zx = 112; az.style.setProperty('--x', zx + '%'); };
+const fx = (cl, st) => { const e = document.createElement(cl === 'am' ? 'img' : 'i'); e.className = cl; if (cl === 'am') { e.src = 'img/p-steak.webp'; e.alt = ''; } Object.assign(e.style, st.css || {}); for (const k in (st.v || {})) e.style.setProperty(k, st.v[k]); ar.append(e); setTimeout(() => e.remove(), 900); };
+const tick = () => { if (!vis || document.hidden || !id) return; t++; const n = HS[id][2], atk = n - 6, reach = RANGED[cls] ? 74 : 40;
+  if (state === 'run') { hf = t % 6; frame(ah, hf, n); zf = (t >> 1) % 4; frame(az, zf, 4); zx -= 1.5; az.style.setProperty('--x', zx + '%'); if (zx <= reach) { state = 'atk'; hf = 0; } }
+  else if (state === 'atk') { const k = Math.min(atk - 1, hf >> 1); frame(ah, 6 + k, n); if (hf === 2) { if (RANGED[cls]) fx('ax', { v: { '--tx': (zx - 10) + '%' } }); else fx('ak', { css: { left: '30%' } }); }
+    if (hf === 4) { az.classList.add('hit'); for (let i = 0; i < 3; i++) fx('am', { css: { left: zx + '%' }, v: { '--dx': (i * 26 - 26) + 'px' } }); } hf++; if (hf > 7) { state = 'rest'; wait = 5; } }
+  else { frame(ah, t % 6, n); if (--wait <= 0) { spawn(); state = 'run'; } } };
+setHero(); new MutationObserver(setHero).observe(hn, { childList: true, characterData: true, subtree: true });
+if (RM) { frame(ah, 0, HS[id] ? HS[id][2] : 9); return; }
+if ('IntersectionObserver' in window) new IntersectionObserver(es => { vis = es[0].isIntersecting; }, { threshold: .2 }).observe(ar); else vis = true;
+timer = setInterval(tick, 85);
 })();
 </script>
 </body>
